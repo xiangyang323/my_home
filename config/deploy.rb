@@ -18,9 +18,9 @@ set :rvm_binary, '/usr/local/rvm/bin/rvm'
 set :deploy_to, "/home/xiang/#{fetch(:application)}"
 set :current, "#{fetch(:deploy_to)}/current"
 
-set :use_sudo, true
+#set :use_sudo, true
 
-set :user, "xiang"
+#set :user, "xiang"
 
 set :scm, :git
 
