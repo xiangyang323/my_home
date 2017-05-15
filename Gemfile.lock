@@ -173,7 +173,6 @@ PLATFORMS
 
 DEPENDENCIES
   capistrano
-  capistrano-bundler (~> 1.1.2)
   capistrano-rails
   capistrano-rvm
   coffee-rails (~> 4.1.0)
