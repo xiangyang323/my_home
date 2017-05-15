@@ -48,6 +48,13 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 set :keep_releases, 5
 
 namespace :deploy do
+  # desc 'Initial Deploy'
+  # task :initial do
+  #   on roles(:app, :batch) do
+  #     execute "gem install bundle"
+  #   end
+  # end 	
+
   before :updated, :gems_install do
     # on roles(:batch) do
     #   within release_path do
@@ -55,11 +62,11 @@ namespace :deploy do
     #   end
     # end
 
-    on roles(:app, :batch) do
-      within release_path do
-        execute :bundle, :exec, :rake, "assets:precompile"
-      end
-    end
+    # on roles(:app, :batch) do
+    #   within release_path do
+    #     execute :bundle, :exec, :rake, "assets:precompile"
+    #   end
+    # end
   end
 
   after :finished, :init do
