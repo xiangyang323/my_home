@@ -4,8 +4,6 @@ require "capistrano/setup"
 # Include default deployment tasks
 require "capistrano/deploy"
 
-#require 'capistrano/rails'
-
 # Load the SCM plugin appropriate to your project:
 #
 # require "capistrano/scm/hg"
@@ -29,6 +27,7 @@ require "capistrano/deploy"
 #   https://github.com/capistrano/passenger
 #
 require "capistrano/rvm"
+require 'capistrano/rails'
 # require "capistrano/rbenv"
 # require "capistrano/chruby"
 #require "capistrano/bundler"
