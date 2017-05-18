@@ -1,5 +1,5 @@
 <div id="my_city"></div>
-<div id="map" style=";height:500px"></div>
+<div id="map" style="width:320px;height:400px"></div>
 
 <script type="text/javascript">
   // 百度地图API功能
@@ -17,7 +17,7 @@
     var cityName = result.name;
     $("#my_city").html(cityName);
     //map.setCenter(cityName);
-    map.centerAndZoom(cityName,13);
+    map.centerAndZoom(cityName,12);
   }
 
   var geolocation = new BMap.Geolocation();
