@@ -5,22 +5,37 @@ class SessionController < ApplicationController
   end
 
   def create
-    login = params[:session][:login]
-    password = params[:session][:password]
+    p current_user
+    if !params[:session].nil? && !params[:session][:verification_code].blank?
+      user = User.find_by(phone: params[:session][:phone])
+      if !user.nil?
+        p user.verification_time
+        p 1.minutes.ago
+        p BCrypt::Password.create(params[:session][:verification_code])
+        if BCrypt::Password.create(params[:session][:verification_code]).is_password?(user.verification_digest) && user.verification_time >= 20.minutes.ago
+          user.password_digest = BCrypt::Password.create(params[:session][:password])
+          user.is_verify = 1
+          user.save
 
-    #User.find_by_login(login)是新增加的一个类方法，用来实现name或者email的登录
-    user = User.find_by_login(login)
-    #authenticate是has_secure_password引入的一个方法，用来判断user的密码与页面中传过来的密码是否一致
-    if user && user.authenticate(password)
-      log_in(user) #SessionsHelper中的方法
-      #判断是否要持续性的记住用户的登录状态
-      params[:session][:remeber_me] == "1" ? remeber(user) : forget(user)
-      redirect_to user_path(user)
-    else
-      flash.now[:danger] = "Invalid login or password."
-      render 'new'
+          log_in(user) #SessionsHelper中的方法
+
+          # if user && user.authenticate(params[:session][:password])
+          #   log_in(user) #SessionsHelper中的方法
+          #   #判断是否要持续性的记住用户的登录状态
+          #   params[:session][:remeber_me] == "1" ? remeber(user) : forget(user)
+          #
+          #   p current_user
+          #   redirect_to root_path
+          # else
+          #   flash[:notice] = "用户已经存在"
+          # end
+        else
+          flash[:notice] = "验证码超时"
+        end
+      else
+        flash[:notice] = "验证码不能匹配,请重新匹配"
+      end
     end
-
   end
 
   def get_verification
@@ -44,9 +59,15 @@ class SessionController < ApplicationController
       end
     end
     user.verification_limit += 1
-    user.verification_code = rand(1000..9999)
+    verification_code = rand(1000..9999)
+    user.verification_digest = BCrypt::Password.create(verification_code)
     user.verification_time = Time.now
     user.save
-    return render json: {value: user.verification_code, status: 1}
+    return render json: {value: verification_code, status: 1}
+  end
+
+  def destroy
+    sign_out
+    redirect_to root_url
   end
 end

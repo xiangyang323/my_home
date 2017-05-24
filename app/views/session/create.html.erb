@@ -15,10 +15,14 @@
     <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control rounded-right", placeholder: "再次输入密码", required: true, equalTo: "#session_password", rangelength: [8,16]   %>
   </div>
 
+  <!--<%= f.label :remeber_me, class: "checkbox inline" do %>-->
+  <%= f.check_box :remeber_me %>记住密码
+  <!--<% end%>-->
   <span onclick="submitSignIn()">提交</span>
   <%end%>
 </div>
 
+<%=flash[:notice]%>
 <script type="text/javascript">
   var VERIFICATION_LIMIT_TIME = 60;
 
