@@ -8,8 +8,8 @@ module SessionHelper
     #先把本次登录的remeber_token保存至数据库
     user.remeber
     #然后把remeber_token保存到cookies中，同时把user_id也保存在cookies中
-    # cookies[:remeber_token] = { value: user.remeber_token, expires: 10.days.from_now.utc}
-    # cookies.signed[:user_id] = { value: user.id, expires: 10.days.from_now.utc}
+    # cookies[:remeber_token] = { value: user.remeber_token, expires: 5.minutes.from_now.utc}
+    # cookies.signed[:user_id] = { value: user.id, expires: 5.minutes.from_now.utc}
     cookies.permanent[:remeber_token] = user.remeber_token
     cookies.permanent.signed[:user_id] = user.id
   end
@@ -20,12 +20,12 @@ module SessionHelper
       @current_user ||= User.find_by(id: user_id)
       #再判断cookies中是否保存了登录信息
     else (user_id = cookies.signed[:user_id])
-    user = User.find_by(id: user_id)
-    #如果cookies中保存了，再用authenticated?这个方法判断cookies[:remeber_token]或者数据库中的remeber_digest是否一致。
-    if user && user.authenticated?(cookies[:remeber_token])
-      log_in(user)
-      @current_user = user
-    end
+      user = User.find_by(id: user_id)
+      #如果cookies中保存了，再用authenticated?这个方法判断cookies[:remeber_token]或者数据库中的remeber_digest是否一致。
+      if user && user.authenticated?(cookies[:remeber_token])
+        log_in(user)
+        @current_user = user
+      end
     end
   end
   #用来判断用户是否登录的方法

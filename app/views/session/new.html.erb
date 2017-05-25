@@ -1,20 +1,21 @@
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for :session, url: login_url, method: :post do |f| %>
+<div>
+  <span>登录</span>
+  <%=form_for :session, url: login_path, method: "post" do |f|%>
+      手机号:<%=f.text_field :phone, class: "form-control", placeholder: "输入手机号"%>
 
-        <%= f.label :login %>
-        <%= f.text_field :login, class: "form-control", placeholder: "input your name or email" %>
+      <div class="input-group margin-bottom-20">
+        <span class="input-group-addon rounded-left"><i class="icon-lock color-red"></i></span>
+        <%= f.password_field :password, autocomplete: "off", class: "form-control rounded-right", placeholder: "密码", required: true, rangelength: [6,16]   %>
+      </div>
 
-        <%= f.label :password %>
-        <%= f.password_field :password, class: "form-control" %>
+      <%= f.label :remeber_me, class: "checkbox inline" do %>
+      <%= f.check_box :remeber_me %>记住密码
+      <%end%>
+      <span onclick="submitLogin()">提交</span>
+  <%end%>
 
-        <%= f.label :remeber_me, class: "checkbox inline" do %>
-            <%= f.check_box :remeber_me %>
-            <span>Remeber me on this computer</span>
-        <% end -%>
-
-        <%= f.submit "Log in", class: "btn-primary" %>
-    <% end -%>
-    <p>New user?<%= link_to "Sign up now!", signup_path %></p>
-  </div>
+  <p>忘记密码<%= link_to "忘记密码", forget_password_path %></p>
+  <p>新用户?<%= link_to "现在注册", signin_path %></p>
 </div>
+
+<%=flash[:notice] if !params[:session].blank?%>
