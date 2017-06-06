@@ -14,7 +14,7 @@ default: &default
 development:
   <<: *default
   host: localhost
-  socket: /tmp/mysql.sock
+  #socket: /tmp/mysql.sock
   database: my_home_development
 
 staging:
