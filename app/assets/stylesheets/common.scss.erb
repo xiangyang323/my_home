@@ -1,0 +1,271 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+input, ul, li {
+  list-style-type: none;
+}
+input{
+  vertical-align:middle;
+  margin-top: -1px;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  font-family: "Microsoft YaHei";
+  color: #333;
+  word-break: break-all;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  height: 100% !important;
+}
+
+.fl { float: left; }
+.fr { float: right; }
+.mt20 { margin-top: 20px;}
+.mt10 { margin-top: 10px;}
+.mb20 { margin-bottom: 20px;}
+.mb10 { margin-bottom: 10px;}
+.line {
+  width: 100%;
+  height: 1px;
+  background-color: #d9d9d9;
+}
+.clearfix:before, .clearfix:after{
+  content:"";
+  display:block;
+}
+.clearfix:after{
+  clear:both;
+}
+.clearfix{zoom:1;}
+.clearfix{
+  margin-bottom: 20px;
+}
+a {
+  color: #337ab7;
+  text-decoration: none;
+}
+a:hover {
+  color: #23527c;
+}
+
+
+.tec { text-align: center;}
+
+
+.md_card {
+  margin: 2%;
+}
+.md_box { margin: 3%; }
+
+
+
+.box_text{
+  position: relative;
+}
+
+.box_text .text{
+  padding-left: 10px;
+  width: 100%;
+  height: 36px;
+  line-height: 36px;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  font-size: 100%;
+  background: #fafafa;
+  text-align: left;
+}
+.mb21>input,.mb20>select{
+  padding-left: 10px;
+  width: 100%;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  font-size: 100%;
+  background: #fafafa;
+
+  color: gray;
+}
+.mb21>input{
+  height: 100px;
+  margin-bottom: 20px;
+}
+.mb20>select{height: 32px;}
+.code {
+  width: 65%;
+  display: inline-block;
+}
+.sms-code {
+  width: 25%;
+  margin-left: 5%;
+  display: inline-block;
+}
+.sms-code-btn {
+  width: 100%;
+  height: 36px;
+  color: #526069;
+  background-color: #e6ebed;
+  border-radius: 3px;
+}
+.sms-code-btn:hover {
+  color:#526069;
+  background-color:#c8d3d8;
+}
+span.theme_submit {
+  width: 100%;
+  height: 36px;
+  line-height: 36px;
+  text-shadow: -1px -1px 0 rgba(0,0,0,0.3);
+  text-align: center;
+  font-size: 16px;
+  color: #ffffff;
+  border: 1px;
+  border-radius: 3px;
+  border-color: #f66d60 #e74c3c #c83f31 #e74c3c;
+  background: #1B83D3;
+}
+
+/* 错误提示 */
+.error-border-red { border-color: #ff4f3e!important; }
+.error-block {
+  margin:  -10px 0 10px 0;
+}
+.error-block-message {
+  text-align: left;
+  color: #F74555;
+}
+.error.icon-info {
+  position: relative;
+  top: 1px;
+  margin-right: 2px;
+  color: #F74555;
+}
+.error.icon-cancel-circle {
+  position: absolute;
+  z-index: 1;
+  right: 10px;
+  top: 8px;
+  font-size: 18px;
+  color: #CCC;
+  cursor: pointer;
+}
+
+
+
+/* 个人中心 */
+.myhome {
+  background: #ededed;
+}
+
+
+.myhome_top {
+  padding: 10px 15px;
+  background: #fff;
+}
+.myhome_top .info-avatar {
+  float: left;
+  margin-right: 15px;
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  background: url(<%= asset_path "u.jpg" %>);
+
+}
+.myhome_top .info-items {
+  margin-right: 95px;
+}
+.myhome_top .info-name {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.myhome_top .info-desc {
+  display: inline-block;
+  max-width: 100%;
+  color: grey;
+  margin-top: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.myhome_con {
+  margin:10px 0;
+}
+
+
+.user_slist {
+  width: 100%;
+  background: #fff;
+}
+.user_slist ul {
+}
+.user_slist li {
+  padding: 10px 20px;
+  border-bottom:1px solid #ddd;
+  width: 100%;
+}
+.user_slist li:last {
+  border-bottom:1px solid #ddd;
+}
+.user_slist li a {
+  margin-left: 12px;
+
+}
+
+.user_slist li span.icon-chevron-thin-right {
+  float: right;
+  position: relative;
+  top: 4px;
+  right: -10px;
+  color: #bbb;
+}
+
+/*头部及底部*/
+.header{
+  line-height: 32px;
+  font-size: 16px;
+  background: #1B83D3;
+  height: 36px;
+  font-weight: bold;
+}
+.header>a{
+  color: #fff;
+  padding-left: 20px;
+  font-size: 16px;
+}
+.menu{
+  background: #fff;
+}
+.menu>a{
+  width: 20%;
+  line-height: 34px;
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+}
+.menu>.control-1{
+  left: 0%;
+}
+.menu>.control-2{
+  left: 20%;
+}
+.menu>.control-3{
+  left: 40%;
+}
+.menu>.control-4{
+  left: 60%;
+}
+.menu>.control-5{
+  left: 80%;
+}

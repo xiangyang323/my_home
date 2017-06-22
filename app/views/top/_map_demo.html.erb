@@ -1,0 +1,153 @@
+<%=current_user.nil?? link_to("登录", login_path):current_user.try(:phone)%>
+<a href="/logout">登出</a>
+<div id="my_city"></div>
+<div id="map" style="height: 500px"></div>
+<script type="text/javascript">
+  // 百度地图API功能
+  var map = new BMap.Map("map");
+  var myCity = new BMap.LocalCity();
+  // 创建地址解析器实例
+  var myGeo = new BMap.Geocoder();
+  //当前位置
+  var geolocation = new BMap.Geolocation();
+
+  var top_left_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT});// 左上角，添加比例尺
+  var top_left_navigation = new BMap.NavigationControl();  //左上角，添加默认缩放平移控件
+  var top_right_navigation = new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_SMALL}); //右上角，仅包含平移和缩放按钮
+  /*缩放控件type有四种类型:
+   BMAP_NAVIGATION_CONTROL_SMALL：仅包含平移和缩放按钮；BMAP_NAVIGATION_CONTROL_PAN:仅包含平移按钮；BMAP_NAVIGATION_CONTROL_ZOOM：仅包含缩放按钮*/
+  add_control();
+  //添加控件和比例尺
+  function add_control(){
+    //map.addControl(top_left_control);
+    //map.addControl(top_left_navigation);
+    map.addControl(top_right_navigation);
+  }
+  //移除控件和比例尺
+  function delete_control(){
+    map.removeControl(top_left_control);
+    map.removeControl(top_left_navigation);
+    map.removeControl(top_right_navigation);
+  }
+
+  myCity.get(myFun);
+  var index = 0;
+  var adds = [
+    "武汉市武汉火车站",
+    "武汉市汉正街",
+    "乌龙泉站",
+    "武汉市盘龙城",
+    "武汉市永安街道",
+  ];
+  bdGEO();
+  function bdGEO(){
+    var add = adds[index];
+    geocodeSearch(add);
+    index++;
+  }
+  function geocodeSearch(add){
+    if(index < adds.length){
+      setTimeout(window.bdGEO,400);
+    }
+    myGeo.getPoint(add, function(point){
+      if (point) {
+        console.log("ppp-->" + add + ":" + point.lng + "," + point.lat);
+        var address = new BMap.Point(point.lng, point.lat);
+        addMarker(address,new BMap.Label(index+":"+add,{offset:new BMap.Size(20,-10)}));
+      }
+    }, "武汉市");
+  }
+  // 编写自定义函数,创建标注
+  function addMarker(point, label){
+    var marker = new BMap.Marker(point);
+    map.addOverlay(marker);
+    marker.setLabel(label);
+
+    //地图上红色区域相应事件
+//    marker.addEventListener("click", function(e){
+//      var pt = e.point;
+//      pointToLocal(pt);
+//    });
+  }
+
+  //  var point = new BMap.Point(114.3162001,30.58108413);
+  //  map.centerAndZoom(point,15);
+  //  var mk = new BMap.Marker(point);
+  //  map.addOverlay(mk);
+  //  map.panTo(point);
+
+  function myFun(result){
+    var cityName = result.name;
+    $("#my_city").html(cityName);
+    //map.setCenter(cityName);
+    map.centerAndZoom(cityName,12);
+  }
+
+
+  geolocation.getCurrentPosition(function(r){
+    if(this.getStatus() == BMAP_STATUS_SUCCESS){
+//      var mk = new BMap.Marker(r.point);
+//      map.addOverlay(mk);
+//      map.panTo(r.point);
+
+      var myIcon = new BMap.Icon("http://developer.baidu.com/map/jsdemo/img/fox.gif", new BMap.Size(300,157));
+      var marker = new BMap.Marker(r.point, {icon:myIcon});// 创建标注
+      map.addOverlay(marker);             // 将标注添加到地图中
+      //marker.disableDragging();           // 不可拖拽
+      marker.enableDragging();
+      map.panTo(r.point);
+      marker.addEventListener("dragend", function(e){
+        var pt = e.point;
+        pointToLocal(pt);
+      });
+      //alert('您的位置：'+r.point.lng+','+r.point.lat);
+    }
+    else {
+      alert('failed'+this.getStatus());
+    }
+  },{enableHighAccuracy: true});
+
+  //关于状态码
+  //BMAP_STATUS_SUCCESS	检索成功。对应数值“0”。
+  //BMAP_STATUS_CITY_LIST	城市列表。对应数值“1”。
+  //BMAP_STATUS_UNKNOWN_LOCATION	位置结果未知。对应数值“2”。
+  //BMAP_STATUS_UNKNOWN_ROUTE	导航结果未知。对应数值“3”。
+  //BMAP_STATUS_INVALID_KEY	非法密钥。对应数值“4”。
+  //BMAP_STATUS_INVALID_REQUEST	非法请求。对应数值“5”。
+  //BMAP_STATUS_PERMISSION_DENIED	没有权限。对应数值“6”。(自 1.1 新增)
+  //BMAP_STATUS_SERVICE_UNAVAILABLE	服务不可用。对应数值“7”。(自 1.1 新增)
+  //BMAP_STATUS_TIMEOUT	超时。对应数值“8”。(自 1.1 新增)
+
+
+
+  // 将地址解析结果显示在地图上,并调整地图视野
+  //  myGeo.getPoint("天河街道", function(point){
+  //    console.log(point);
+  //    if (point) {
+  //      map.centerAndZoom(point, 12);
+  //      map.addOverlay(new BMap.Marker(point));
+  //      myGeo.getLocation(point, function(rs){
+  //        var addComp = rs.addressComponents;
+  //        //alert(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
+  //        var address = new BMap.Point(point.lng, point.lat);
+  //        addMarker(address,new BMap.Label(":"+addComp.province + addComp.city + addComp.district + addComp.street + addComp.streetNumber,{offset:new BMap.Size(20,-10)}));
+  //      });
+  //    }else{
+  //      alert("您选择地址没有解析到结果!");
+  //    }
+  //  }, "武汉市");
+
+
+  //地图上红色区域相应事件
+  map.addEventListener("click", function(e){
+    var pt = e.point;
+    pointToLocal(pt);
+  });
+
+  function pointToLocal(point){
+    myGeo.getLocation(point, function(rs){
+      var addComp = rs.addressComponents;
+      alert(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
+    });
+  }
+</script>
