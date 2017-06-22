@@ -13,4 +13,6 @@ Rails.application.routes.draw do
   get 'logout' => 'session#destroy'
 
   get "session/get_verification", to: "session#get_verification"
+
+  get "myhome", to: "home#index"
 end

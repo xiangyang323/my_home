@@ -1,21 +1,26 @@
-<div>
-  <span>登录</span>
-  <%=form_for :session, url: login_path, method: "post" do |f|%>
-      手机号:<%=f.text_field :phone, class: "form-control", placeholder: "输入手机号"%>
-
-      <div class="input-group margin-bottom-20">
-        <span class="input-group-addon rounded-left"><i class="icon-lock color-red"></i></span>
-        <%= f.password_field :password, autocomplete: "off", class: "form-control rounded-right", placeholder: "密码", required: true, rangelength: [6,16]   %>
-      </div>
-
-      <%= f.label :remeber_me, class: "checkbox inline" do %>
-      <%= f.check_box :remeber_me %>记住密码
-      <%end%>
-      <span onclick="submitLogin()">提交</span>
-  <%end%>
-
-  <p>忘记密码<%= link_to "忘记密码", forget_password_path %></p>
-  <p>新用户?<%= link_to "现在注册", signin_path %></p>
+<div class="md_card">
+  <div class="md_box">
+    <%=form_for :session, url: login_path, method: "post" do |f|%>
+    <div class="box_text mb20">
+      <%=f.text_field :phone, class: "text", placeholder: "输入手机号", size: "11"%>
+      <span class="error icon-cancel-circle"></span>
+    </div>
+    <div class="box_text mb10">
+      <%= f.password_field :password, autocomplete: "off", class: "text", placeholder: "密码", required: true, rangelength: [6,16]   %>
+    </div>
+    <div class="box_text mb20">
+      <label><input name="" type="hidden" value="0"><input type="checkbox" value=""> 自动登录</label>
+      <%= link_to "忘记密码?", forget_password_path , class: "fr"%>
+    </div>
+    <div class="box_text mb20">
+      <span onclick="submitLogin()" class="theme_submit">登录</span>
+    </div>
+    <div class="line"></div>
+    <div class="mt20 tec">
+      还没有帐号？<%= link_to "注册新帐号", signin_path %>
+    </div>
+    <%end%>
+  </div>
 </div>
 
 <%=flash[:notice] if !params[:session].blank?%>

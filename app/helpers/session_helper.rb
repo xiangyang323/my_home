@@ -2,6 +2,9 @@ module SessionHelper
   #一旦账号密码正确，则成功登录，同时在session中记录session[:user_id]
   def log_in(user)
     session[:user_id] = user.id
+    user.login_at = Time.now.to_s(:db)
+    user.ip = request.remote_ip
+    user.save
   end
   #如果用户允许在本地保存登录信息，则保存cookies
   def remeber(user)
@@ -13,6 +16,7 @@ module SessionHelper
     cookies.permanent[:remeber_token] = user.remeber_token
     cookies.permanent.signed[:user_id] = user.id
   end
+
   #获取当前登录用户，如未登录，则为nil.@current_user这个实例变量是为了避免每次调用current_user方法都去查询一遍数据库的情况。
   def current_user
     #先判断session中是否为nil
@@ -28,10 +32,12 @@ module SessionHelper
       end
     end
   end
+
   #用来判断用户是否登录的方法
   def logged_in?
     !current_user.nil?
   end
+
   #用来清空持久性登录信息
   def forget(user)
     user.forget #将user.remeber_digest重置为nil
@@ -39,10 +45,15 @@ module SessionHelper
     cookies.delete(:user_id)
     cookies.delete(:remeber_token)
   end
+
   #退出，同时删除session中的信息
   def log_out
     forget(current_user)
     session.delete(:user_id)
     @current_user = nil
+  end
+
+  def current_username
+    current_user.user_name.nil?? current_user.try(:phone):current_user.try(:user_name)
   end
 end

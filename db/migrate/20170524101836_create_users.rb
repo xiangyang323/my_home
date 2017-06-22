@@ -13,7 +13,9 @@ class CreateUsers < ActiveRecord::Migration
       t.integer :is_verify, limit:2, default: 0
 
       t.integer :status, limit: 2, default: 1
-
+      t.string :user_name, limit: 20
+      t.string :ip, limit: 20
+      t.datetime :login_at
       t.timestamps null: false
     end
   end

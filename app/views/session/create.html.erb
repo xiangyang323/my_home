@@ -1,22 +1,33 @@
-<div>
-  <span>注册</span>
-  <%=form_for :session, url: signin_path, method: "post" do |f|%>
-  手机号:<%=f.text_field :phone, class: "form-control", placeholder: "输入手机号"%>
+<div class="md_card">
+  <div class="md_box">
+    <%=form_for :session, url: signin_path, method: "post" do |f|%>
+    <h2 class="mb20">会员注册</h2>
+    <div class="box_text mb20">
+      <%=f.text_field :phone, class: "text", size: "11", placeholder: "输入手机号"%>
+    </div>
 
-  <%=f.text_field :verification_code, autocomplete: "off"%> <span onclick="getVerificationCode()" time="60" id="verification_code_btn">获得手机验证码</span>
-
-  <div class="input-group margin-bottom-20">
-    <span class="input-group-addon rounded-left"><i class="icon-lock color-red"></i></span>
-    <%= f.password_field :password, autocomplete: "off", class: "form-control rounded-right", placeholder: "密码", required: true, rangelength: [8,16]   %>
+    <div class="box_text code mb20">
+      <%=f.text_field :verification_code, autocomplete: "off", class: "text", size: "6"%>
+    </div>
+    <div class="sms-code">
+      <span class="sms-code-btn" onclick="getVerificationCode()" time="60" id="verification_code_btn">获得验证码</span>
+    </div>
+    <div class="box_text mb20">
+      <%= f.password_field :password, autocomplete: "off", class: "text", placeholder: "密码（字母，数字，至少6位）", rangelength: [8,16]   %>
+    </div>
+    <div class="box_text mb20">
+      <%= f.password_field :password_confirmation, autocomplete: "off", class: "text", placeholder: "再次输入密码", equalTo: "#session_password", rangelength: [8,16]   %>
+    </div>
+    <div class="box_text mb20">
+      <span onclick="submitSignIn()" class="theme_submit">提交</span>
+    </div>
+    <%end%>
+    <div class="line"></div>
+    <div class="mt20 tec">
+      已有帐号？<%= link_to "立即登陆", login_path %>
+    </div>
   </div>
-
-  <div class="input-group margin-bottom-20">
-    <span class="input-group-addon rounded-left"><i class="icon-lock color-red"></i></span>
-    <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control rounded-right", placeholder: "再次输入密码", required: true, equalTo: "#session_password", rangelength: [8,16]   %>
-  </div>
-
-  <span onclick="submitSignIn()">提交</span>
-  <%end%>
 </div>
+
 
 <%=flash[:notice] if !params[:session].blank?%>
