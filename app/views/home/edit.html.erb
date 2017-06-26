@@ -1,7 +1,8 @@
 <div class="md_home">
   <div class="md_box">
+    <%=form_for :user_profile, url: signin_path, method: "post" do |f|%>
     <div class="box_text mb20">
-      <p>用户名</p>
+      <p>昵称</p>
       <input placeholder="" class="text" type="text">
     </div>
     <div class="box_text mb20">
@@ -54,6 +55,6 @@
     <div class="box_text mb20 detailed_address">
       <input placeholder="详细地址" class="text" type="text">
     </div>
-
+    <%end%>
   </div>
 </div>

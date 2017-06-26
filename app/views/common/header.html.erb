@@ -1,5 +1,5 @@
 <div class="header">
-  <a href="javascript:;" onclick="history.go(-1);">返回</a>
+  <a class="return" href="javascript:;" onclick="history.go(-1);">返回</a>
   <span class="headline"><%=@head_title%></span>
-  <%=content_tag(:span, "退出", class:"logout") if !current_user.nil? && action_name != "edit"%>
+  <%=link_to("退出", logout_path, class: "logout") if !current_user.nil? && action_name != "edit"%>
 </div>

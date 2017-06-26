@@ -22,18 +22,20 @@ class SessionController < ApplicationController
     @head_title = "注册"
     if !params[:session].nil? && !params[:session][:verification_code].blank? && !params[:session][:phone].blank?
       user = User.find_by(phone: params[:session][:phone])
+      p user
       if !user.nil?
-        p user.verification_time
-        p 20.minutes.ago
-        if BCrypt::Password.new(user.verification_digest) == params[:session][:verification_code] && user.verification_time >= 20.minutes.ago
-          user.password_digest = BCrypt::Password.create(params[:session][:password])
-          user.is_verify = 1
-          user.save
-          log_in(user) #SessionsHelper中的方法
-          p current_user
-          redirect_to myhome_path
+        if user.is_verify?
+          flash[:notice] = "用户已经注册成功"
         else
-          flash[:notice] = "验证码超时"
+          if BCrypt::Password.new(user.verification_digest) == params[:session][:verification_code] && user.verification_time >= 20.minutes.ago
+            user.password_digest = BCrypt::Password.create(params[:session][:password])
+            user.is_verify = 1
+            user.save
+            log_in(user) #SessionsHelper中的方法
+            redirect_to myhome_path
+          else
+            flash[:notice] = "验证码超时"
+          end
         end
       else
         flash[:notice] = "验证码不能匹配,请重新匹配"
@@ -51,10 +53,14 @@ class SessionController < ApplicationController
       user = User.new
       user.phone = params[:phone]
     else
-      if user.verification_time.to_date == Date.today
-        return render json: {value: "已经验证超过三次了，明天继续", status: 3} if user.verification_limit > 2
+      if user.is_verify?
+        flash[:notice] = "用户已经注册成功"
       else
-        user.verification_limit = 0
+        if user.verification_time.to_date == Date.today
+          return render json: {value: "已经验证超过三次了，明天继续", status: 3} if user.verification_limit > 2
+        else
+          user.verification_limit = 0
+        end
       end
     end
     user.verification_limit += 1
@@ -67,6 +73,7 @@ class SessionController < ApplicationController
 
   def forget_password
     p current_user
+    @head_title = "重置密码"
     if !params[:session].nil? && !params[:session][:verification_code].blank? && !params[:session][:phone].blank?
       user = User.find_by(phone: params[:session][:phone])
       if !user.nil?
