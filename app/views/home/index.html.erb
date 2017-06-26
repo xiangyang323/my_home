@@ -1,10 +1,17 @@
 <div class="myhome">
   <!--用户头像／名字-->
   <div class="myhome_top">
-    <div class="info-avatar"></div>
-    <div class="info-items is-bfc">
-      <div class="info-name"><%=current_username%></div>
-      <div class="info-desc" title="" data-original-title="373544436@qq.com">373544436@qq.com</div></div>
+    <%= link_to myhome_edit_path do%>
+    <div class="info-avatar"><%=image_tag "u.jpg"%></div>
+    <div class="info-items is-bfc clearfix">
+      <div class="info-name">
+        <%=current_username%>
+        <div class="introduce">
+          简介:暂无简介.
+        </div>
+      </div>
+    </div>
+    <%end%>
   </div>
   <div class="myhome_con">
     <ul class="user_slist">

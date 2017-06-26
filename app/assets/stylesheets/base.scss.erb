@@ -55,15 +55,34 @@ a {
 a:hover {
   color: #23527c;
 }
-
-
+.notice{
+  text-align: right;
+  color: red;
+  font-size: 8px;
+}
+.headline{
+  font-size: 16px;
+  height: 34px;
+  text-align: center;
+  line-height: 32px;
+  background: #1B83D3;
+  color: #fff;
+  font-weight: bold;
+}
+p{
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+p>span{
+  color: red;
+}
 .tec { text-align: center;}
 
 
 .md_card {
   margin: 2%;
 }
-.md_box { margin: 3%; }
+.md_box { margin: 3%;}
 
 
 
@@ -115,9 +134,9 @@ a:hover {
 }
 .sms-code-btn:hover {
   color:#526069;
-  background-color:#c8d3d8;
+  background-color:#c8d3d8；
 }
-span.theme_submit {
+div.confirm_area>span,a.theme_submit {
   width: 100%;
   height: 36px;
   line-height: 36px;
@@ -129,6 +148,9 @@ span.theme_submit {
   border-radius: 3px;
   border-color: #f66d60 #e74c3c #c83f31 #e74c3c;
   background: #1B83D3;
+}
+div.confirm_area>span{
+  display: block;
 }
 
 /* 错误提示 */
@@ -156,6 +178,9 @@ span.theme_submit {
   cursor: pointer;
 }
 
+.content{
+  padding-top:40px;
+}
 
 
 /* 个人中心 */
@@ -163,19 +188,21 @@ span.theme_submit {
   background: #ededed;
 }
 
+.myhome .introduce{
+  font-size: 14px;
+  font-weight: normal;
+}
 
 .myhome_top {
   padding: 10px 15px;
   background: #fff;
 }
-.myhome_top .info-avatar {
+.myhome_top .info-avatar img{
   float: left;
   margin-right: 15px;
   width: 60px;
   height: 60px;
   border-radius: 30px;
-  background: url(<%= asset_path "u.jpg" %>);
-
 }
 .myhome_top .info-items {
   margin-right: 95px;
@@ -183,7 +210,6 @@ span.theme_submit {
 .myhome_top .info-name {
   font-size: 18px;
   font-weight: 600;
-  margin-top: 6px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -197,12 +223,18 @@ span.theme_submit {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
+.myhome_top a{
+  color: #000;
+}
 
 .myhome_con {
   margin:10px 0;
 }
 
+.myhome .my_image{
+  width: 60px;
+  height: 60px;
+}
 
 .user_slist {
   width: 100%;
@@ -215,7 +247,7 @@ span.theme_submit {
   border-bottom:1px solid #ddd;
   width: 100%;
 }
-.user_slist li:last {
+.user_slist li:last-child {
   border-bottom:1px solid #ddd;
 }
 .user_slist li a {
@@ -223,7 +255,7 @@ span.theme_submit {
 
 }
 
-.user_slist li span.icon-chevron-thin-right {
+.my_group_title span,.user_slist li span.icon-chevron-thin-right {
   float: right;
   position: relative;
   top: 4px;
@@ -237,15 +269,28 @@ span.theme_submit {
   font-size: 16px;
   background: #1B83D3;
   height: 36px;
-  font-weight: bold;
+  text-align: center;
+  text-indent: -52px;
+  position: fixed;
+  z-index: 999;
+  width:100%;
+  top:0;
+}
+.logout{
+  float: right;
+  color: #ffffff;
+  text-indent: -36px;
 }
 .header>a{
   color: #fff;
   padding-left: 20px;
   font-size: 16px;
+  float: left;
+  text-indent: 0;
 }
 .menu{
   background: #fff;
+  padding-top:60px;
 }
 .menu>a{
   width: 20%;
@@ -269,3 +314,4 @@ span.theme_submit {
 .menu>.control-5{
   left: 80%;
 }
+

@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   get "session/get_verification", to: "session#get_verification"
 
   get "myhome", to: "home#index"
+  get "myhome/edit", to: "home#edit"
 end

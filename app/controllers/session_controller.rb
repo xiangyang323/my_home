@@ -2,6 +2,7 @@ class SessionController < ApplicationController
 
   #http://www.jianshu.com/p/c525e4c18f5a
   def new
+    @head_title = "登录"
     if !params[:session].nil? && !params[:session][:phone].blank?
       user = User.find_by(phone: params[:session][:phone])
       if user && BCrypt::Password.new(user.password_digest) == params[:session][:password]
@@ -9,7 +10,7 @@ class SessionController < ApplicationController
         #判断是否要持续性的记住用户的登录状态
         params[:session][:remeber_me] == "1" ? remeber(user) : forget(user)
         p current_user
-        redirect_to root_path
+        redirect_to myhome_path
       else
         flash[:notice] = "密码或者手机号不对"
       end
@@ -18,7 +19,7 @@ class SessionController < ApplicationController
   end
 
   def create
-    p current_user
+    @head_title = "注册"
     if !params[:session].nil? && !params[:session][:verification_code].blank? && !params[:session][:phone].blank?
       user = User.find_by(phone: params[:session][:phone])
       if !user.nil?
@@ -30,7 +31,7 @@ class SessionController < ApplicationController
           user.save
           log_in(user) #SessionsHelper中的方法
           p current_user
-          redirect_to root_path
+          redirect_to myhome_path
         else
           flash[:notice] = "验证码超时"
         end

@@ -1,0 +1,59 @@
+<div class="md_home">
+  <div class="md_box">
+    <div class="box_text mb20">
+      <p>用户名</p>
+      <input placeholder="" class="text" type="text">
+    </div>
+    <div class="box_text mb20">
+      <p>联系电话</p>
+      <input placeholder="" class="text" type="text">
+    </div>
+
+    <div class="update">
+      <p>上传图像</p>
+      <div class="clearfix">
+        <div class="my_image">
+          <%=image_tag "u.jpg"%>
+        </div>
+        <div class="upload_form">
+          <form action="" method="post" enctype="multipart/form-data" name="upload_form">
+            <input name="imgfile" type="file" accept="image/gif, image/jpeg">
+            <label>图片大小小于400KB</label>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="box_text mb20">
+      <p>所属分类<span>＊</span></p>
+      <select>
+        <option value=""></option>
+        <option value="">1</option>
+        <option value="">2</option>
+        <option value="">3</option>
+      </select>
+    </div>
+    <div class="clearfix select_area">
+      <p>工作所在地</p>
+      <div class="box_text mb20 select_box">
+        <select>
+          <option value="">湖北省</option>
+          <option value="">北京市</option>
+          <option value="">2</option>
+          <option value="">3</option>
+        </select>
+      </div>
+      <div class="box_text mb20 select_box select_box2">
+        <select>
+          <option value="">武汉市</option>
+          <option value="">1</option>
+          <option value="">2</option>
+          <option value="">3</option>
+        </select>
+      </div>
+    </div>
+    <div class="box_text mb20 detailed_address">
+      <input placeholder="详细地址" class="text" type="text">
+    </div>
+
+  </div>
+</div>
