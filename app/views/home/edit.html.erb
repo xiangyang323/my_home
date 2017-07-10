@@ -1,26 +1,25 @@
 <div class="md_home">
-  <div class="md_box">
-    <%=form_for :user_profile, url: signin_path, method: "post" do |f|%>
+  <div class="md_box" style="margin-bottom: 40px;">
+    <%= form_for @user_profile, url: myhome_edit_path, method: "post" do |f|%>
     <div class="box_text mb20">
       <p>昵称</p>
-      <input placeholder="" class="text" type="text">
-    </div>
-    <div class="box_text mb20">
-      <p>联系电话</p>
-      <input placeholder="" class="text" type="text">
+      <%=f.text_field :user_name, class: "text"%>
     </div>
 
     <div class="update">
       <p>上传图像</p>
       <div class="clearfix">
-        <div class="my_image">
-          <%=image_tag "u.jpg"%>
+        <div class="my_image" id="my_image">
+          <%=image_tag current_user.user_profile.get_avatar_img("medium")%>
         </div>
         <div class="upload_form">
-          <form action="" method="post" enctype="multipart/form-data" name="upload_form">
-            <input name="imgfile" type="file" accept="image/gif, image/jpeg">
-            <label>图片大小小于400KB</label>
-          </form>
+          <label>图片大小小于2兆</label>
+
+          <%= f.file_field :avatar %>
+
+          <!--<label for="upload_user_image">上传图片</label>-->
+          <!--<input type="file" id="upload_user_image" onchange="uploadUserImage(this)" style="display: none">-->
+
         </div>
       </div>
     </div>
@@ -55,6 +54,7 @@
     <div class="box_text mb20 detailed_address">
       <input placeholder="详细地址" class="text" type="text">
     </div>
+    <button>提交</button>
     <%end%>
   </div>
 </div>

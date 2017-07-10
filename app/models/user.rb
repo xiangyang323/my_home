@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_one :user_profile
 
   attr_accessor :remeber_token
 
@@ -31,4 +32,5 @@ class User < ActiveRecord::Base
   def is_verify?
     self.is_verify ==0? false : true
   end
+
 end

@@ -5,7 +5,7 @@
     <div class="info-avatar"><%=image_tag "u.jpg"%></div>
     <div class="info-items is-bfc clearfix">
       <div class="info-name">
-        <%=current_username%>
+        <%=current_user.user_profile.user_name%>
         <div class="introduce">
           简介:暂无简介.
         </div>
@@ -15,7 +15,11 @@
   </div>
   <div class="myhome_con">
     <ul class="user_slist">
-      <li><span class="icon-file-text2"></span><a href="brand_build.html" class="">我的资料</a><span class="icon-chevron-thin-right"></span></li>
+      <li>
+        <span class="icon-file-text2"></span>
+        <%= link_to "我的资料", myhome_edit_path%>
+        <span class="icon-chevron-thin-right"></span>
+      </li>
       <li><span class="icon-file-picture"></span><a href="brand_build.html" class="">我的展示</a><span class="icon-chevron-thin-right"></span></li>
     </ul>
   </div>
