@@ -3,22 +3,40 @@ $().ready(function() {
   $("#signinForm").validate({
     rules: {
       "session[phone]": {
-        required:true,
+        required: true,
         isMobile: true
       },
-
+      "session[verification_code]": {
+        required: true,
+        //digits: true,
+        //maxlength: 4
+      },
+      "session[password]":{
+        required: true,
+        rangelength:[6,10]
+      },
+      "session[password_confirmation]":{
+        required: true,
+        equalTo: "#session_password",
+        rangelength:[6,10]
+      }
     },
     messages: {
       "session[phone]": {
         required: "手机号不能为空",
         isMobile: "请输入有效手机号"
       },
+      "session[verification_code]": {
+        required: "验证码不能为空",
+        maxlength: "验证码异常"
+      },
     },
     submitHandler: function(form) { //验证成功时调用
-      alert(form);
+      //alert(form);
+      form.submit();
     },
     invalidHandler: function(form, validator) {  //不通过回调
-      alert('验证不通过');
+      //alert('验证不通过');
       return false;
     }
 
@@ -37,9 +55,6 @@ function submitLogin(){
     $("form").submit();
 }
 
-function submitSignIn(){
-    $("#signinForm").submit();
-}
 
 function getVerificationCode(){
     var time = parseInt($("#verification_code_btn").attr("time"));
