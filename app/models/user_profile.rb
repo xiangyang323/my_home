@@ -1,6 +1,10 @@
 class UserProfile < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, foreign_key: :user_id
 
+  validates_presence_of :user_name, :user_id
+  validates_uniqueness_of :user_name
+  validates_length_of :user_name, :maximum => 20
+  validates_length_of :motto, :maximum => 100
 
   before_save :randomize_file_name
 

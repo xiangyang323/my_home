@@ -6,6 +6,11 @@
       <%=f.text_field :user_name, class: "text"%>
     </div>
 
+    <div class="box_text mb20">
+      <p>简介</p>
+      <%=f.text_area :motto, class: "text"%>
+    </div>
+
     <div class="update">
       <p>上传图像</p>
       <div class="clearfix">
@@ -14,12 +19,9 @@
         </div>
         <div class="upload_form">
           <label>图片大小小于2兆</label>
-
-          <%= f.file_field :avatar %>
-
-          <!--<label for="upload_user_image">上传图片</label>-->
-          <!--<input type="file" id="upload_user_image" onchange="uploadUserImage(this)" style="display: none">-->
-
+          <%#= f.file_field :avatar %>
+          <label for="upload_user_image">上传图片</label>
+          <input type="file" id="upload_user_image" onchange="uploadUserImage(this)" style="display: none">
         </div>
       </div>
     </div>
@@ -34,27 +36,18 @@
     </div>
     <div class="clearfix select_area">
       <p>工作所在地</p>
-      <div class="box_text mb20 select_box">
-        <select>
-          <option value="">湖北省</option>
-          <option value="">北京市</option>
-          <option value="">2</option>
-          <option value="">3</option>
-        </select>
-      </div>
-      <div class="box_text mb20 select_box select_box2">
-        <select>
-          <option value="">武汉市</option>
-          <option value="">1</option>
-          <option value="">2</option>
-          <option value="">3</option>
-        </select>
+      <%= f.hidden_field :address%>
+      <div data-toggle="distpicker">
+        <%distpicker_arr = @user_profile.try(:address).blank?? [] : @user_profile.try(:address).split(",") %>
+        <select id="province" data-province="<%= distpicker_arr[0].blank?? '---- 选择省 ----' : distpicker_arr[0]%>"></select>
+        <select id="city" data-city="<%= distpicker_arr[1].blank?? '---- 选择市 ----' : distpicker_arr[1]%>">"></select>
+        <select id="district" data-district="<%= distpicker_arr[2].blank?? '---- 选择区 ----' : distpicker_arr[2]%>">"></select>
       </div>
     </div>
     <div class="box_text mb20 detailed_address">
-      <input placeholder="详细地址" class="text" type="text">
+      <input id="detail_address" placeholder="详细地址" class="text" type="text" value="<%=distpicker_arr[3]%>">
     </div>
-    <button>提交</button>
+    <span onclick="userEditorSubmit()">提交</span>
     <%end%>
   </div>
 </div>

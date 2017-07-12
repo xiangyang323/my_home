@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_one :user_profile
+  has_one :user_profile, foreign_key: :user_id
 
   attr_accessor :remeber_token
 

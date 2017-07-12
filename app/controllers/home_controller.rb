@@ -3,6 +3,7 @@ class HomeController < ApplicationController
 
   def index
     @head_title = "我的页面"
+    p current_user.user_profile
   end
 
   def edit
@@ -10,6 +11,10 @@ class HomeController < ApplicationController
     @user_profile = current_user.user_profile
     if request.post?
       @user_profile.attributes = params.require(:user_profile).permit(:user_name, :motto, :category, :address)
+      if !@user_profile.valid?
+        flash[:notice] = @user_profile.errors.full_messages
+        p flash[:notice]
+      end
       @user_profile.save
     end
   end

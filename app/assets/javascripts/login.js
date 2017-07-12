@@ -131,3 +131,18 @@ function timedCount(){
   $("#verification_code_btn").attr("time", time);
   setTimeout("timedCount()", 1000);
 }
+
+function userEditorSubmit(){
+  var address = "";
+  var province = $("#province").val();
+  var city = $("#city").val();
+  var district = $("#district").val();
+  var detail_address = $("#detail_address").val().replace(",", "");
+  address += province + ",";
+  address += city + ",";
+  address += district + ",";
+  address += detail_address;
+  console.log(address)
+  $("form #user_profile_address").val(address);
+  $("form").submit();
+}
