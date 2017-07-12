@@ -84,7 +84,9 @@ p>span{
 }
 .md_box { margin: 3%;}
 
-
+body{
+  position: relative;
+}
 
 .box_text{
   position: relative;
@@ -302,7 +304,32 @@ div.confirm_area button.confirm_a {
 }
 .menu>a{
   display: inline-block;
-  width: 19%;
+  width: 18%;
   line-height: 34px;
   text-align: center;
+}
+
+.common_modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 9999;
+}
+
+.common_modal .modal_tip_content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.8);
+  -webkit-transform: translate(-50%,-50%);
+  -moz-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  -o-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
 }
