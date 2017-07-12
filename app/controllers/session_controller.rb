@@ -22,7 +22,6 @@ class SessionController < ApplicationController
     @head_title = "注册"
     if !params[:session].nil? && !params[:session][:verification_code].blank? && !params[:session][:phone].blank?
       user = User.find_by(phone: params[:session][:phone])
-      p user
       if !user.nil?
         if user.is_verify?
           flash[:notice] = "用户已经注册成功"
@@ -38,7 +37,7 @@ class SessionController < ApplicationController
           end
         end
       else
-        flash[:notice] = "验证码不能匹配,请重新匹配"
+        flash[:notice] = "验证码验证失败"
       end
     end
   end
@@ -68,14 +67,15 @@ class SessionController < ApplicationController
     user.verification_digest = BCrypt::Password.create(verification_code)
     user.verification_time = Time.now
     user.save
+    UserProfile.create(user_id: user.id, user_name: user.phone)
     return render json: {value: verification_code, status: 1}
   end
 
   def forget_password
-    p current_user
     @head_title = "重置密码"
     if !params[:session].nil? && !params[:session][:verification_code].blank? && !params[:session][:phone].blank?
       user = User.find_by(phone: params[:session][:phone])
+      p user
       if !user.nil?
         p user.verification_time
         p 20.minutes.ago
@@ -85,7 +85,7 @@ class SessionController < ApplicationController
           user.save
           log_in(user) #SessionsHelper中的方法
           p current_user
-          redirect_to root_path
+          redirect_to myhome_path
         else
           flash[:notice] = "验证码超时"
         end

@@ -15,5 +15,7 @@ Rails.application.routes.draw do
   get "session/get_verification", to: "session#get_verification"
 
   get "myhome", to: "home#index"
+  post "myhome/upload_image", to: "home#upload_image"
   get "myhome/edit", to: "home#edit"
+  post "myhome/edit", to: "home#edit"
 end

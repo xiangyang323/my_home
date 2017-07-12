@@ -53,7 +53,4 @@ module SessionHelper
     @current_user = nil
   end
 
-  def current_username
-    current_user.user_name.nil?? current_user.try(:phone):current_user.try(:user_name)
-  end
 end
