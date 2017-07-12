@@ -17,7 +17,7 @@ class CreateBrands < ActiveRecord::Migration[5.0]
       t.timestamps
     end
 
-    add_index :brands, :user_id, unique: true
-    add_index :brands, :check_flag, unique: true
+    add_index :brands, :user_id
+    add_index :brands, :check_flag
   end
 end
