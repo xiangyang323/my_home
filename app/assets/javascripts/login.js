@@ -3,10 +3,9 @@ $().ready(function() {
   $("form").validate({
     rules: {
       "session[phone]": {
-        required: true,
+        required:true,
         isMobile: true
       },
-<<<<<<< HEAD
       "session[verification_code]":{
         required:true,
       },
@@ -17,21 +16,6 @@ $().ready(function() {
       "session[password_confirmation]":{
         required:true,
         equalTo:"#session_password"
-=======
-      "session[verification_code]": {
-        required: true,
-        //digits: true,
-        //maxlength: 4
-      },
-      "session[password]":{
-        required: true,
-        rangelength:[6,10]
-      },
-      "session[password_confirmation]":{
-        required: true,
-        equalTo: "#session_password",
-        rangelength:[6,10]
->>>>>>> 434dbb1e972ad1be42780c878c917d11fc35c52c
       }
     },
     messages: {
@@ -41,7 +25,6 @@ $().ready(function() {
       },
       "session[verification_code]": {
         required: "验证码不能为空",
-<<<<<<< HEAD
       },
       "session[password]": {
         required: "密码不能为空",
@@ -50,18 +33,11 @@ $().ready(function() {
       "session[password_confirmation]": {
         required: "密码不能为空",
         equalTo: "两次输入密码必须相同"
-=======
-        maxlength: "验证码异常"
->>>>>>> 434dbb1e972ad1be42780c878c917d11fc35c52c
       },
     },
     submitHandler: function(form) { //验证成功时调用
       //alert(form);
-<<<<<<< HEAD
       return true
-=======
-      form.submit();
->>>>>>> 434dbb1e972ad1be42780c878c917d11fc35c52c
     },
     invalidHandler: function(form, validator) {  //不通过回调
       //alert('验证不通过');
@@ -119,42 +95,39 @@ function submitLogin(){
   $("form").submit();
 }
 
-<<<<<<< HEAD
 function submitSignIn(){
   $("form").submit();
 }
-=======
->>>>>>> 434dbb1e972ad1be42780c878c917d11fc35c52c
 
 function getVerificationCode(){
-    var time = parseInt($("#verification_code_btn").attr("time"));
-    if(time < VERIFICATION_LIMIT_TIME) return;
-    var formObj = $('form #session_phone');
-    if(formObj.valid()){
-      var phoneNumber = formObj.val();
-      console.log(phoneNumber);
-      $.get({url: "/session/get_verification?phone=" + phoneNumber,
-        success: function(data) {
-          console.log(data);
-          if(data.status != 1){
-            $("#verification_code_btn").attr("time", VERIFICATION_LIMIT_TIME);
-          }else{
-            timedCount();
-          }
+  var time = parseInt($("#verification_code_btn").attr("time"));
+  if(time < VERIFICATION_LIMIT_TIME) return;
+  var formObj = $('form #session_phone');
+  if(formObj.valid()){
+    var phoneNumber = formObj.val();
+    console.log(phoneNumber);
+    $.get({url: "/session/get_verification?phone=" + phoneNumber,
+      success: function(data) {
+        console.log(data);
+        if(data.status != 1){
+          $("#verification_code_btn").attr("time", VERIFICATION_LIMIT_TIME);
+        }else{
+          timedCount();
         }
-      });
-    }
+      }
+    });
+  }
 }
 
 function timedCount(){
-    var time = parseInt($("#verification_code_btn").attr("time"));
-    time = time - 1;
-    if(time == 0){
-        $("#verification_code_btn").attr("time", VERIFICATION_LIMIT_TIME);
-        $("#verification_code_btn").html("获得验证码");
-        return;
-    }
-    $("#verification_code_btn").html(time + "秒");
-    $("#verification_code_btn").attr("time", time);
-    setTimeout("timedCount()", 1000);
+  var time = parseInt($("#verification_code_btn").attr("time"));
+  time = time - 1;
+  if(time == 0){
+    $("#verification_code_btn").attr("time", VERIFICATION_LIMIT_TIME);
+    $("#verification_code_btn").html("获得验证码");
+    return;
+  }
+  $("#verification_code_btn").html(time + "秒");
+  $("#verification_code_btn").attr("time", time);
+  setTimeout("timedCount()", 1000);
 }
