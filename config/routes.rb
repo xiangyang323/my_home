@@ -18,4 +18,8 @@ Rails.application.routes.draw do
   post "myhome/upload_image", to: "home#upload_image"
   get "myhome/edit", to: "home#edit"
   post "myhome/edit", to: "home#edit"
+
+
+  get "brand/new", to: "brand#new", as: :new_brand
+
 end
