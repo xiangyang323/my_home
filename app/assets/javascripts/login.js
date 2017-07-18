@@ -76,7 +76,7 @@ function uploadUserImage(obj){
   $.ajax({
     data: data,
     type: 'POST',
-    url: "/myhome/upload_image",
+    url: "/home/upload_image",
     cache: false,
     contentType: false,
     processData: false,

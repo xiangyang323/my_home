@@ -3,7 +3,10 @@ class HomeController < ApplicationController
 
   def index
     @head_title = "我的页面"
-    p current_user.user_profile
+  end
+
+  def list
+    @head_title = "我的展示"
   end
 
   def edit

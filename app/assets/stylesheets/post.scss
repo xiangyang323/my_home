@@ -1,0 +1,27 @@
+.box_text .case_view{
+  margin-bottom: 20px;
+}
+.box_text .case_view>input.text{
+  width: 15%;
+}
+.box_text .case_view>span.room,
+.case_view_square>span.room{
+  padding:2%;
+}
+.box_text .case_view_square>input.text{
+  width: 40%;
+}
+.upload_form_post{
+  margin-bottom: 40px;
+}
+.confirm_area_post{
+  width: 50%;
+  margin: 0 auto;
+}
+.mb21  textarea{width: 100%;
+  height: 100px;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  margin-bottom: 20px;
+  padding-left:10px;
+}

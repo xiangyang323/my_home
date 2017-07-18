@@ -1,8 +1,8 @@
 <div class="menu">
-  <a class="control-1" href="">首页</a>
+  <%= link_to "首页", root_path, class: "control-1" %>
   <a class="control-2" href="">附近</a>
   <a class="control-3" href="">找装修</a>
   <a class="control-4" href="">买材料</a>
-  <%= link_to "我的", myhome_path, class: "control-5" %>
+  <%= link_to "我的", home_path, class: "control-5" %>
 </div>
 <%=render file: "common/model"%>

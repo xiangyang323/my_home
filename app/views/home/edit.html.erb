@@ -1,6 +1,6 @@
 <div class="md_home">
   <div class="md_box" style="margin-bottom: 40px;">
-    <%= form_for @user_profile, url: myhome_edit_path, method: "post" do |f|%>
+    <%= form_for @user_profile, url: home_edit_path, method: "post" do |f|%>
     <div class="box_text mb20">
       <p>昵称</p>
       <%=f.text_field :user_name, class: "text"%>
@@ -8,7 +8,7 @@
 
     <div class="box_text mb20">
       <p>简介</p>
-      <%=f.text_area :motto, class: "text"%>
+      <%=f.text_area :motto, class: "text", maxlength: 100%>
     </div>
 
     <div class="update">
@@ -25,15 +25,6 @@
         </div>
       </div>
     </div>
-    <div class="box_text mb20">
-      <p>所属分类<span>＊</span></p>
-      <select>
-        <option value=""></option>
-        <option value="">1</option>
-        <option value="">2</option>
-        <option value="">3</option>
-      </select>
-    </div>
     <div class="clearfix select_area">
       <p>工作所在地</p>
       <%= f.hidden_field :address%>
@@ -47,7 +38,9 @@
     <div class="box_text mb20 detailed_address">
       <input id="detail_address" placeholder="详细地址" class="text" type="text" value="<%=distpicker_arr[3]%>">
     </div>
-    <span onclick="userEditorSubmit()">提交</span>
+    <div class="confirm_area">
+      <span onclick="userEditorSubmit()" class="confirm_a">提交</span>
+    </div>
     <%end%>
   </div>
 </div>

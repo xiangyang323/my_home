@@ -1,0 +1,55 @@
+<div class="md_card">
+  <div class="md_box">
+    <%=form_for :post, url: home_post_new_path, method: "post" do |f|%>
+        <div class="box_text mb20">
+          <p>案例标题<span>＊</span></p>
+          <%=f.text_field :title, class: "text"%>
+        </div>
+        <div class="box_text mb20">
+          <p>案例位置<span>＊</span></p>
+          <div data-toggle="distpicker">
+            <select id="province" data-province="---- 选择省 ----" name="post[province]"></select>
+            <select id="city" data-city="---- 选择市 ----" name="post[city]"></select>
+            <select id="district" data-district="---- 选择区 ----" name="post[district]"></select>
+            <%= f.text_field :detail_address, placeholder: "详细地址", class: "text" %>
+          </div>
+        </div>
+        <div class="box_text mb20">
+          <p>楼盘<span>＊</span></p>
+          <%= f.text_field :building, class: "text" %>
+          <!--<p>附近楼盘：紫金花园&nbsp;中南花园&nbsp;楚天都市花园</p>-->
+        </div>
+        <div class="box_text mb20">
+          <div class="case_view">
+            <p>案例概况<span>＊</span></p>
+            <%= f.text_field :room_cnt, class: "text" %><span class="room">室</span>
+            <%= f.text_field :living_room_cnt, class: "text" %><span class="room">厅</span>
+            <%= f.text_field :toilet_cnt, class: "text" %><span class="room">卫</span>
+            <%= f.text_field :kitchen_cnt, class: "text" %><span class="room">厨</span>
+          </div>
+          <div class="case_view_square">
+            <%= f.text_field :home_size, class: "text" %><span class="room">平米</span>
+          </div>
+        </div>
+        <div class="box_text mb20">
+          <p>服务品牌<span>＊</span></p>
+          <input placeholder="" class="text" type="text">
+          <p>常用品牌：大自然地板&nbsp;方太橱柜</p>
+          <p>常用小组：联盟一&nbsp;联盟二</p>
+        </div>
+        <div class="mb21">
+          <p>案例详情<span>＊</span></p>
+          <%=f.text_area :content, class: "text"%>
+        </div>
+        <div class="upload_form upload_form_post">
+          <label class="words">案例图片</label>
+            <input name="imgfile" type="file" accept="image/gif, image/jpeg"/>
+        </div>
+        <div class="confirm_area confirm_area_post">
+          <span class="confirm_a" >发布</span>
+        </div>
+  <%end%>
+  </div>
+</div>
+
+<%=flash[:notice]%>

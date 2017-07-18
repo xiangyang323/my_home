@@ -14,11 +14,13 @@ Rails.application.routes.draw do
 
   get "session/get_verification", to: "session#get_verification"
 
-  get "myhome", to: "home#index"
-  post "myhome/upload_image", to: "home#upload_image"
-  get "myhome/edit", to: "home#edit"
-  post "myhome/edit", to: "home#edit"
+  get "home", to: "home#index"
+  post "home/upload_image", to: "home#upload_image"
+  get "home/edit", to: "home#edit"
+  post "home/edit", to: "home#edit"
+  get "home/list", to: "home#list"
 
+  get "home/post/new", to: "home/post#new"
 
   get "brand/new", to: "brand#new", as: :new_brand
 

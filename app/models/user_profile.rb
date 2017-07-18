@@ -26,6 +26,10 @@ class UserProfile < ApplicationRecord
     end
   end
 
+  def get_motto
+    self.motto.blank?? "暂无简介." : self.motto
+  end
+
   def randomize_file_name
     unless avatar_file_name.nil? || avatar_file_name_changed?
       extension = File.extname(avatar_file_name).downcase

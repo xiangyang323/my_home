@@ -293,23 +293,6 @@ div.confirm_area button.confirm_a {
   float: left;
   text-indent: 0;
 }
-.menu{
-  background: #fff;
-  z-index: 999;
-  overflow: hidden;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: 34px;
-  background: #1B83D3;
-}
-.menu>a{
-  display: inline-block;
-  width: 18%;
-  line-height: 34px;
-  text-align: center;
-  color: #fff;
-}
 
 .common_modal {
   position: fixed;
@@ -319,6 +302,8 @@ div.confirm_area button.confirm_a {
   bottom: 0;
   background: rgba(0,0,0,0.5);
   z-index: 9999;
+  z-index: 9999;
+  display: none;
 }
 
 .common_modal .modal_tip_content {
@@ -335,3 +320,76 @@ div.confirm_area button.confirm_a {
   -o-transform: translate(-50%,-50%);
   transform: translate(-50%,-50%);
 }
+
+.menu{
+  z-index: 999;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  border-top: 1px solid #ccc;
+}
+.menu>a{
+  color: #1B83D3;
+  width: 20%;
+  line-height: 34px;
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+}
+
+.menu>.control-1{
+  left: 0%;
+  background: #fff url(<%=asset_url('top.png')%>) no-repeat;
+  background-size:20px 20px;
+  background-position: top center;
+  padding-top: 20px;
+}
+.menu>.control-2{
+  left: 20%;
+  background: #fff url(<%=asset_url('nearby.png')%>) no-repeat;
+  background-size:20px 20px;
+  background-position: top center;
+  padding-top: 20px;
+}
+.menu>.control-3{
+  left: 40%;
+  background: #fff url(<%=asset_url('fitment.png')%>) no-repeat;
+  background-size:20px 20px;
+  background-position: top center;
+  padding-top: 20px;
+}
+.menu>.control-4{
+  left: 60%;
+  background: #fff url(<%=asset_url('material.png')%>) no-repeat;
+  background-size:20px 20px;
+  background-position: top center;
+  padding-top: 20px;
+}
+.menu>.control-5{
+  left: 80%;
+  background: #fff url(<%=asset_url('my.png')%>) no-repeat;
+  background-size:20px 20px;
+  background-position: top center;
+  padding-top: 20px;
+}
+
+
+div.confirm_area>span,a.theme_submit {
+  width: 100%;
+  height: 36px;
+  line-height: 36px;
+  text-shadow: -1px -1px 0 rgba(0,0,0,0.3);
+  text-align: center;
+  font-size: 16px;
+  color: #ffffff;
+  border: 1px;
+  border-radius: 3px;
+  border-color: #f66d60 #e74c3c #c83f31 #e74c3c;
+  background: #1B83D3;
+}
+div.confirm_area>span{
+  display: block;
+}
+
