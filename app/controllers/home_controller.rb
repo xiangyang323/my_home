@@ -13,7 +13,7 @@ class HomeController < ApplicationController
     @head_title = "编辑"
     @user_profile = current_user.user_profile
     if request.post?
-      @user_profile.attributes = params.require(:user_profile).permit(:user_name, :motto, :category, :address)
+      @user_profile.attributes = params.require(:user_profile).permit(:user_name, :motto, :province, :city, :district, :detail_address)
       if !@user_profile.valid?
         flash[:notice] = @user_profile.errors.full_messages
         p flash[:notice]

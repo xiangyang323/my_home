@@ -27,16 +27,14 @@
     </div>
     <div class="clearfix select_area">
       <p>工作所在地</p>
-      <%= f.hidden_field :address%>
       <div data-toggle="distpicker">
-        <%distpicker_arr = @user_profile.try(:address).blank?? [] : @user_profile.try(:address).split(",") %>
-        <select id="province" data-province="<%= distpicker_arr[0].blank?? '---- 选择省 ----' : distpicker_arr[0]%>"></select>
-        <select id="city" data-city="<%= distpicker_arr[1].blank?? '---- 选择市 ----' : distpicker_arr[1]%>">"></select>
-        <select id="district" data-district="<%= distpicker_arr[2].blank?? '---- 选择区 ----' : distpicker_arr[2]%>">"></select>
+        <%= f.select :province, {}, {}, {"data-province": @user_profile.province.blank?? '---- 选择省 ----': @user_profile.province}%>
+        <%= f.select :city, {}, {}, {"data-city": @user_profile.city.blank?? '---- 选择市 ----': @user_profile.city}%>
+        <%= f.select :district, {}, {}, {"data-district": @user_profile.district.blank?? '---- 选择区 ----': @user_profile.district}%>
       </div>
     </div>
     <div class="box_text mb20 detailed_address">
-      <input id="detail_address" placeholder="详细地址" class="text" type="text" value="<%=distpicker_arr[3]%>">
+      <%= f.text_field :detail_address, placeholder: "详细地址", class: "text" %>
     </div>
     <div class="confirm_area">
       <span onclick="userEditorSubmit()" class="confirm_a">提交</span>

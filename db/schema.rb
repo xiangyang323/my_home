@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170710091135) do
+ActiveRecord::Schema.define(version: 20170714032113) do
 
-  create_table "brand_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+  create_table "brand_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "brands", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+  create_table "brands", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id",                                      null: false
     t.string   "name",                            default: "", null: false
     t.integer  "logo",                                         null: false
@@ -38,14 +38,34 @@ ActiveRecord::Schema.define(version: 20170710091135) do
     t.index ["user_id"], name: "index_brands_on_user_id", using: :btree
   end
 
-  create_table "user_profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+  create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "title",           limit: 100
+    t.string   "province",        limit: 50
+    t.string   "city",            limit: 50
+    t.string   "district",        limit: 50
+    t.string   "detail_address",  limit: 80
+    t.string   "building",        limit: 30
+    t.integer  "room_cnt"
+    t.integer  "living_room_cnt"
+    t.integer  "toilet_cnt"
+    t.integer  "kitchen_cnt"
+    t.integer  "home_size"
+    t.text     "content",         limit: 65535
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  create_table "user_profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
     t.string   "user_name"
     t.string   "motto"
     t.string   "category"
-    t.string   "address"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.string   "province",            limit: 50
+    t.string   "city",                limit: 50
+    t.string   "district",            limit: 50
+    t.string   "detail_address",      limit: 80
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
@@ -53,12 +73,10 @@ ActiveRecord::Schema.define(version: 20170710091135) do
     t.index ["user_id"], name: "index_user_profiles_on_user_id", using: :btree
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
-    t.string   "user_name",           limit: 20
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "phone",               limit: 20
     t.string   "password_digest"
     t.string   "remeber_digest"
-    t.bigint   "user_type"
     t.string   "verification_digest"
     t.integer  "verification_limit",  limit: 2,  default: 0
     t.datetime "verification_time"

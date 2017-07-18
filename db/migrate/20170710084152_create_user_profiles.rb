@@ -5,10 +5,10 @@ class CreateUserProfiles < ActiveRecord::Migration[5.0]
       t.string :user_name, unique: true
       # 介绍
       t.string :motto
-      # 分类
-      t.string :category
-
-      t.string :address
+      t.string :province, limit: 50
+      t.string :city, limit: 50
+      t.string :district, limit: 50
+      t.string :detail_address, limit: 80
       t.timestamps null: false
     end
 
