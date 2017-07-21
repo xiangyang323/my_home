@@ -1,0 +1,118 @@
+<div class="band_content">
+  <%= form_for @brand, url: new_brand_path, method: "post" do |f| %>
+      <%= f.hidden_field :user_id, value: @current_user.id %>
+      <input type="hidden" id="brand_user_id" name="brand[user_id]" value="<%= @current_user.id%>">
+      <div class="box_text mb20">
+        <%= label :brand, :name, "品牌名称" %>
+        <%= f.text_field :name, class: "text" %>
+      </div>
+      <div class="box_text mb20">
+        <%= label :brand, :logo, "品牌LOGO" %>
+        <div class="clearfix">
+          <div class="brand_logo float-image" id="brand_logo">
+            <%= image_tag @brand.get_avatar_img("thumb") %>
+          </div>
+          <div class="upload_form">
+            <span>图片大小小于2兆</span>
+            <br>
+            <label for="upload_brand_logo">点击上传图片</label>
+            <input type="file" id="upload_brand_logo" name="brand[logo]" onchange="uploadBrandImg(this)" style="display: none">
+          </div>
+        </div>
+      </div>
+      <div class="box_text mb20">
+        <%= label :brand, :brand_category_id, "所属分类" %>
+        <%= f.select :brand_category_id, BrandCategory.all.map { |c| [c.name, c.id] }, :prompt => '请选择' %>
+      </div>
+      <div class="box_text mb20">
+        <p>所属地区</p>
+        <div data-toggle="distpicker">
+          <%= f.select :province, {}, {}, {"data-province": (@brand.blank? || @brand.province.blank?) ? '---- 选择省 ----': @brand.province}%>
+          <%= f.select :city, {}, {}, {"data-city": (@brand.blank? || @brand.city.blank?)? '---- 选择市 ----': @brand.city}%>
+          <%= f.select :district, {}, {}, {"data-district": (@brand.blank? || @brand.district.blank?)? '---- 选择区 ----': @brand.district}%>
+        </div>
+      </div>
+      <div class="box_text mb20 detailed_address">
+        <%= f.text_field :detail_address, placeholder: "详细地址", class: "text" %>
+      </div>
+      <div class="box_text mb20">
+        <%= label :brand, :leader, "负责人姓名" %>
+        <%= f.text_field :leader, class: "text" %>
+      </div>
+      <div class="box_text mb20">
+        <%= label :brand, :tel, "负责人手机" %>
+        <%= f.text_field :tel, as: :tel, class: "text" %>
+      </div>
+      <div class="box_text mb20">
+        <%= label :brand, :business_licence, "营业执照" %>
+        <div class="clearfix">
+          <div class="brand_licence float-image" id="brand_licence">
+            <%= image_tag @brand.get_avatar_img("thumb") %>
+          </div>
+          <div class="upload_form">
+            <span>图片大小小于400KB</span>
+            <br>
+            <label for="upload_brand_licence">点击上传图片</label>
+            <input type="file" id="upload_brand_licence" name="brand[licence]" onchange="uploadBrandImg(this)" style="display: none">
+          </div>
+        </div>
+      </div>
+      <div class="box_text mb20">
+        <%= label :brand, :business_scope, "经营范围" %>
+        <%= f.text_field :business_scope, class: "text" %>
+      </div>
+      <div class="box_text mb20">
+        <%= label :brand, :content, "品牌介绍" %>
+        <%= f.text_field :content, class: "text" %>
+      </div>
+      <div class="box_text tac">
+        <input type="button" value="提交" class="btn-submit">
+      </div>
+  <% end %>
+</div>
+<script type="application/javascript">
+  function uploadBrandImg(obj){
+    console.log("1111");
+    var file = obj.files[0];
+    if (file == undefined) {
+      return;
+    }
+    var name = file.name;
+    var size = file.size;
+    var type = file.type;
+    console.log(file);
+
+    var regex = new RegExp("(.*?)\.(png|jpg|jpeg|gif)$");
+    if (!regex.test(type)) {
+      alert("请上传图片文件.");
+      return;
+    }
+
+    if (size > 2000000) {
+      alert("图片大小请小于2兆.");
+      return;
+    }
+
+    var data;
+    data = new FormData;
+    data.append(obj.attr('name'), file, name);
+
+    $.ajax({
+      data: data,
+      type: 'POST',
+      url: "/home/brand/upload_image",
+      cache: false,
+      contentType: false,
+      processData: false,
+      success: function(data, status){
+        if(data.url != undefined){
+          $("#my_image img").attr("src", data.url);
+        }
+      },
+      error: function(data, status, e){
+        alert("图片上传失败");
+      }
+    });
+  }
+
+</script>

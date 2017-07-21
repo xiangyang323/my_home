@@ -3,13 +3,14 @@ class CreateBrands < ActiveRecord::Migration[5.0]
     create_table :brands do |t|
       t.integer :user_id, null: false
       t.string :name, null: false, default: ""
-      t.integer :logo, null: false
       t.integer :brand_category_id, null: false, default: 0
-      t.string :place, null: false
+      t.string :province, limit: 50
+      t.string :city, limit: 50
+      t.string :district, limit: 50
+      t.string :detail_address, limit: 80
       t.string :leader, null: false, default: ""
-      t.integer :tel, null: false, default: 0
+      t.integer :tel, null: false
       t.integer :tel_code
-      t.integer :business_licence, null: false
       t.text :business_scope, null: false
       t.text :content, null: false
       t.integer :check_flag, null: false, default: 0

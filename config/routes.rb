@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
   get "home/post/new", to: "home/post#new"
 
-  get "brand/new", to: "brand#new", as: :new_brand
+  get "home/brand/new", to: "home/brand#new", as: :new_brand
+  post "home/brand/new", to: "home/brand#new"
 
 end
