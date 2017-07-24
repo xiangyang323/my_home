@@ -4,8 +4,14 @@ class Home::BrandController < HomeController
 
   def new
     @brand = Brand.new
+
     if request.post?
       @brand.attributes = brand_form_params
+      if @brand.valid?
+        @brand.save
+      else
+        p @brand.errors
+      end
     end
   end
 
@@ -21,7 +27,7 @@ class Home::BrandController < HomeController
                 :detail_address,
                 :leader,
                 :tel,
-                :business_licence,
+                :licence,
                 :business_scope,
                 :content
         )

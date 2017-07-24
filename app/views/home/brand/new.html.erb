@@ -1,5 +1,5 @@
 <div class="band_content">
-  <%= form_for @brand, url: new_brand_path, method: "post" do |f| %>
+  <%= form_for @brand, url: new_brand_path, html: {id: 'form_brand'}, method: "post" do |f| %>
       <%= f.hidden_field :user_id, value: @current_user.id %>
       <input type="hidden" id="brand_user_id" name="brand[user_id]" value="<%= @current_user.id%>">
       <div class="box_text mb20">
@@ -10,13 +10,14 @@
         <%= label :brand, :logo, "品牌LOGO" %>
         <div class="clearfix">
           <div class="brand_logo float-image" id="brand_logo">
-            <%= image_tag @brand.get_avatar_img("thumb") %>
+            <%_logo = @brand.blank? ? nil : @brand.logo%>
+            <%= image_tag Upload.get_avatar(_logo,"thumb" ) %>
           </div>
           <div class="upload_form">
             <span>图片大小小于2兆</span>
             <br>
             <label for="upload_brand_logo">点击上传图片</label>
-            <input type="file" id="upload_brand_logo" name="brand[logo]" onchange="uploadBrandImg(this)" style="display: none">
+            <input type="file" id="upload_brand_logo" name="brand[logo]" onchange="uploadBrandImg(this,'brand_logo')" style="display: none">
           </div>
         </div>
       </div>
@@ -44,16 +45,17 @@
         <%= f.text_field :tel, as: :tel, class: "text" %>
       </div>
       <div class="box_text mb20">
-        <%= label :brand, :business_licence, "营业执照" %>
+        <%= label :brand, :licence, "营业执照" %>
         <div class="clearfix">
           <div class="brand_licence float-image" id="brand_licence">
-            <%= image_tag @brand.get_avatar_img("thumb") %>
+            <%_licence = @brand.blank? ? nil : @brand.licence%>
+            <%= image_tag Upload.get_avatar(_licence,"thumb" )%>
           </div>
           <div class="upload_form">
             <span>图片大小小于400KB</span>
             <br>
             <label for="upload_brand_licence">点击上传图片</label>
-            <input type="file" id="upload_brand_licence" name="brand[licence]" onchange="uploadBrandImg(this)" style="display: none">
+            <input type="file" id="upload_brand_licence" name="brand[licence]" onchange="uploadBrandImg(this,'brand_licence')" style="display: none">
           </div>
         </div>
       </div>
@@ -66,13 +68,17 @@
         <%= f.text_field :content, class: "text" %>
       </div>
       <div class="box_text tac">
-        <input type="button" value="提交" class="btn-submit">
+        <span onclick="brandSubmit()" class="confirm_a">提交</span>
       </div>
   <% end %>
 </div>
 <script type="application/javascript">
-  function uploadBrandImg(obj){
-    console.log("1111");
+  function brandSubmit(){
+    $("#form_brand").submit();
+  }
+  function uploadBrandImg(obj,showImg){
+    var image = $('#'+ showImg + ' img');
+
     var file = obj.files[0];
     if (file == undefined) {
       return;
@@ -95,18 +101,18 @@
 
     var data;
     data = new FormData;
-    data.append(obj.attr('name'), file, name);
+    data.append('upload[image]', file, name);
 
     $.ajax({
       data: data,
       type: 'POST',
-      url: "/home/brand/upload_image",
+      url: "/home/upload/create",
       cache: false,
       contentType: false,
       processData: false,
       success: function(data, status){
         if(data.url != undefined){
-          $("#my_image img").attr("src", data.url);
+          image.attr("src", data.url);
         }
       },
       error: function(data, status, e){
