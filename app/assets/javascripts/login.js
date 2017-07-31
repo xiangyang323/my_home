@@ -47,48 +47,9 @@ $().ready(function() {
   });
 });
 
+
 function uploadUserImage(obj){
-  console.log("1111");
-  var file = obj.files[0];
-  if (file == undefined) {
-    return;
-  }
-  var name = file.name;
-  var size = file.size;
-  var type = file.type;
-  console.log(file);
-
-  var regex = new RegExp("(.*?)\.(png|jpg|jpeg|gif)$");
-  if (!regex.test(type)) {
-    alert("请上传图片文件.");
-    return;
-  }
-
-  if (size > 2000000) {
-    alert("图片大小请小于2兆.");
-    return;
-  }
-
-  var data;
-  data = new FormData;
-  data.append('user_profile[avatar]', file, name);
-
-  $.ajax({
-    data: data,
-    type: 'POST',
-    url: "/home/upload_image",
-    cache: false,
-    contentType: false,
-    processData: false,
-    success: function(data, status){
-      if(data.url != undefined){
-        $("#my_image img").attr("src", data.url);
-      }
-    },
-    error: function(data, status, e){
-      alert("图片上传失败");
-    }
-  });
+  uploadImage(obj, "/home/upload_image", "#my_image img", 'user_profile[avatar]')
 }
 
 function submitLogin(){

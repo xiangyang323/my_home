@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   get "home/list", to: "home#list"
 
   get "home/post/new", to: "home/post#new"
+  post "home/post/new", to: "home/post#new"
+  post "home/post/upload_image", to: "home/post#upload_image"
 
   get "home/brand/new", to: "home/brand#new", as: :new_brand
   post "home/brand/new", to: "home/brand#new"

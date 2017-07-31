@@ -18,7 +18,14 @@ class CreatePosts < ActiveRecord::Migration[5.0]
       # 房屋大小
       t.integer :home_size
 
-      t.text :content
+      t.integer :user_id
+
+      t.text :content1
+      t.text :content2
+      t.text :content3
+
+      t.integer :check_flag, defalut: 0, limit: 4
+      t.integer :status, defalut: 1, limit: 4
 
       t.timestamps null: false
     end

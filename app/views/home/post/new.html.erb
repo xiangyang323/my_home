@@ -1,12 +1,12 @@
 <div class="md_card">
   <div class="md_box">
-    <%=form_for :post, url: home_post_new_path, method: "post" do |f|%>
+    <%=form_for @post, url: home_post_new_path, method: "post" do |f|%>
         <div class="box_text mb20">
-          <p>案例标题<span>＊</span></p>
+          <p>案例标题</p>
           <%=f.text_field :title, class: "text"%>
         </div>
         <div class="box_text mb20">
-          <p>案例位置<span>＊</span></p>
+          <p>案例位置</p>
           <div data-toggle="distpicker">
             <select id="province" data-province="---- 选择省 ----" name="post[province]"></select>
             <select id="city" data-city="---- 选择市 ----" name="post[city]"></select>
@@ -15,13 +15,13 @@
           </div>
         </div>
         <div class="box_text mb20">
-          <p>楼盘<span>＊</span></p>
+          <p>楼盘<!--span>＊</span--></p>
           <%= f.text_field :building, class: "text" %>
           <!--<p>附近楼盘：紫金花园&nbsp;中南花园&nbsp;楚天都市花园</p>-->
         </div>
         <div class="box_text mb20">
           <div class="case_view">
-            <p>案例概况<span>＊</span></p>
+            <p>案例概况<!--span>＊</span--></p>
             <%= f.text_field :room_cnt, class: "text" %><span class="room">室</span>
             <%= f.text_field :living_room_cnt, class: "text" %><span class="room">厅</span>
             <%= f.text_field :toilet_cnt, class: "text" %><span class="room">卫</span>
@@ -32,21 +32,45 @@
           </div>
         </div>
         <div class="box_text mb20">
-          <p>服务品牌<span>＊</span></p>
-          <input placeholder="" class="text" type="text">
-          <p>常用品牌：大自然地板&nbsp;方太橱柜</p>
-          <p>常用小组：联盟一&nbsp;联盟二</p>
+          <p>服务品牌<!--span>＊</span--></p>
+          <ul class="product_edit clearfix">
+            <%5.times.each do |i|%>
+              <li>
+                <div class="main_wrap">
+                  <div class="pic_wrap">
+                    <%=image_tag "u.jpg"%>
+                  </div>
+                  <div class="name_short">哈哈哈哈哈红红火火恍恍惚惚哈哈哈哈哈哈哈哈哈</div>
+                </div>
+              </li>
+            <%end%>
+          </ul>
         </div>
         <div class="mb21">
-          <p>案例详情<span>＊</span></p>
-          <%=f.text_area :content, class: "text"%>
+          <p>案例详情</p>
+          <div id="content1">
+            <%=image_tag @post.get_avatar_img(:medium), id:"avatar1", width:"100%", onclick:"$('#file_avatar1').trigger('click')"%>
+            <input type="file" id="file_avatar1" onchange="uploadPostImage(this)" style="display: none">
+            <%=f.text_area :content1, class: "text"%>
+          </div>
+
+          <div id="add_content2" onclick="showContent(2)" style="<%=@post.avatar2.nil?? '':'display: none'%>">+添加详情</div>
+          <div id="content2" style="<%=@post.check_img("avatar2")? 'display: none':''%>">
+            <%=image_tag @post.get_avatar_img(:medium, "avatar2"), id:"avatar2", width:"100%", onclick:"$('#file_avatar2').trigger('click')"%>
+            <input type="file" id="file_avatar2" onchange="uploadPostImage(this)" style="display: none">
+            <%=f.text_area :content2, class: "text"%>
+          </div>
+
+          <div id="add_content3" style="display: none" onclick="showContent(3)">+添加详情</div>
+          <div id="content3" style="<%=@post.check_img("avatar3")? 'display: none':''%>">
+            <%=image_tag @post.get_avatar_img(:medium, "avatar3"), id:"avatar3", width:"100%", onclick:"$('#file_avatar3').trigger('click')"%>
+            <input type="file" id="file_avatar3" onchange="uploadPostImage(this)" style="display: none">
+            <%=f.text_area :content3, class: "text"%>
+          </div>
         </div>
-        <div class="upload_form upload_form_post">
-          <label class="words">案例图片</label>
-            <input name="imgfile" type="file" accept="image/gif, image/jpeg"/>
-        </div>
-        <div class="confirm_area confirm_area_post">
-          <span class="confirm_a" >发布</span>
+
+        <div class="confirm_area confirm_area_post" onclick="$('form').submit()">
+          <span class="confirm_a">保存</span>
         </div>
   <%end%>
   </div>
