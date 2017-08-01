@@ -10,7 +10,7 @@ class CreateBrands < ActiveRecord::Migration[5.0]
       t.string :district, limit: 50
       t.string :detail_address, limit: 80
       t.string :leader, null: false, default: ""
-      t.integer :tel, null: false
+      t.string :tel, limit: 20
       t.integer :tel_code
       t.text :business_scope, null: false
       t.string :licence

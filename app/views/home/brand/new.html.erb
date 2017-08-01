@@ -10,6 +10,7 @@
         <%= label :brand, :logo, "品牌LOGO" %>
         <div class="clearfix">
           <div class="brand_logo float-image" id="brand_logo">
+            <input type="hidden" name="brand[logo]" value="">
             <%_logo = @brand.blank? ? nil : @brand.logo%>
             <%= image_tag Upload.get_avatar(_logo,"thumb" ) %>
           </div>
@@ -17,7 +18,7 @@
             <span>图片大小小于2兆</span>
             <br>
             <label for="upload_brand_logo">点击上传图片</label>
-            <input type="file" id="upload_brand_logo" name="brand[logo]" onchange="uploadBrandImg(this,'brand_logo')" style="display: none">
+            <input type="file" id="upload_brand_logo" onchange="uploadBrandImg(this,'brand_logo')" style="display: none">
           </div>
         </div>
       </div>
@@ -48,6 +49,7 @@
         <%= label :brand, :licence, "营业执照" %>
         <div class="clearfix">
           <div class="brand_licence float-image" id="brand_licence">
+            <input type="hidden" name="brand[licence]" value="">
             <%_licence = @brand.blank? ? nil : @brand.licence%>
             <%= image_tag Upload.get_avatar(_licence,"thumb" )%>
           </div>
@@ -55,7 +57,7 @@
             <span>图片大小小于400KB</span>
             <br>
             <label for="upload_brand_licence">点击上传图片</label>
-            <input type="file" id="upload_brand_licence" name="brand[licence]" onchange="uploadBrandImg(this,'brand_licence')" style="display: none">
+            <input type="file" id="upload_brand_licence" onchange="uploadBrandImg(this,'brand_licence')" style="display: none">
           </div>
         </div>
       </div>
@@ -78,6 +80,7 @@
   }
   function uploadBrandImg(obj,showImg){
     var image = $('#'+ showImg + ' img');
+    var inputVal = $('#' + showImg + ' input');
 
     var file = obj.files[0];
     if (file == undefined) {
@@ -113,6 +116,7 @@
       success: function(data, status){
         if(data.url != undefined){
           image.attr("src", data.url);
+          inputVal.val(data.upload_id)
         }
       },
       error: function(data, status, e){
