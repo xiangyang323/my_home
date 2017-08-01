@@ -9,6 +9,7 @@ class Home::BrandController < HomeController
       @brand.attributes = brand_form_params
       if @brand.valid?
         @brand.save
+        redirect_to :list
       else
         p @brand.errors
       end
@@ -33,5 +34,17 @@ class Home::BrandController < HomeController
         )
   end
   private :brand_form_params
+
+ ##品牌列表
+  def list
+    @brands = Brand.all.order("updated_at desc")
+  end
+
+  ##绑定品牌
+  def bind
+
+  end
+
+
 
 end

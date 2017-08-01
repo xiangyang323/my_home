@@ -26,3 +26,8 @@
     color: #fff;
     font-size: 14px;
 }
+
+.brand_list ul li{
+    margin-bottom: 1%;
+    text-align: center;
+}
