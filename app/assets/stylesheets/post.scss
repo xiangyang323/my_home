@@ -68,4 +68,227 @@ div.main_wrap{
   width: 100%;
   height: 100px;
   background: #000;
-  opacity: 0.6;}
+  opacity: 0.6;
+}
+.case_head,.design_area,.design_detail,.like{
+  padding: 4% 4% 0 4%;
+}
+.case_pic{
+  float: left;
+  width: 47%;
+  position: relative;
+}
+.case_pic>span{
+  position: absolute;
+  background: #000;
+  width: 100%;
+  height: 25px;
+  color: #fff;
+  opacity: 0.6;
+  left: 0;
+  bottom: 0;
+  text-align: right;
+  padding-right: 15px;
+}
+.case_info{
+  float: left;
+  width: 50%;
+  margin-left: 3%;
+}
+.case_pic>img{
+  width: 100%;
+  height: 150px;
+}
+.case_title>p{
+  font-size: 20px;
+  font-weight: bold;
+}
+.case_intro{
+  margin-bottom: 20px;
+}
+.case_intro span,.case_visit span{
+  font-size: 16px;
+
+}
+.case_intro>span,.case_visit>span{
+  display: inline-block;
+}
+.case_location{
+  margin-bottom: 10px;
+  position: relative;
+}
+.case_location>span{
+  padding-left: 2%;
+}
+.case_location span.icon-phone{
+  position: absolute;
+  right: 3%;
+  top: 3px;
+}
+.service_brand{
+  margin: 5px 0;
+  border-top: 2px solid #fafafa;
+  border-bottom: 4px solid #fafafa;
+}
+.service_brand .brand_pic{
+  padding: 0 4%;
+}
+.service_brand .brand_title,.brand_title2{
+  text-align: center;
+}
+.brand_title,.brand_title2{
+  padding: 10px 0;
+}
+.brand_title>p,.brand_title2>p{
+  font-size: 16px;
+  font-weight: bold;
+}
+.brand_pic ul li img{
+  float: left;
+  width: 31%;
+  height: 50px;
+  margin: 1%;
+}
+.brand_pic ul{
+  position: relative;
+}
+.brand_pic span.icon-chevron-thin-left,
+.brand_pic span.icon-chevron-thin-right{
+  position: absolute;
+  top: 40%;
+  font-size: 16px;
+}
+.brand_pic span.icon-chevron-thin-left{
+  left: -15px;
+}
+.brand_pic span.icon-chevron-thin-right{
+  right: -15px;
+}
+.design_area{
+  height: 80px;
+  position: relative;
+}
+.design_all{
+  margin-bottom: 40px;
+}
+.design_pic>img{
+  padding: 10px 0;
+}
+.designer{
+  border-bottom: 20px solid #fafafa;
+}
+.designer_pic img{
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+}
+.designer_pic,.designer_info{
+  float: left;
+}
+.designer_info{
+  margin-left: 5%;
+}
+.designer_info .designer_name{
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+}
+.designer .icon-phone{
+  position: absolute;
+  top: 30px;
+  right: 10%;
+  font-size: 16px;
+}
+.design_word>p>span{
+  font-weight: bold;
+  font-size: 16px;
+  color: #333;
+  display: block;
+  padding: 10px 0;
+}
+.design_detail .design_pic,.design_pic>img{
+  width: 100%;
+  height: 200px;
+}
+.brand_title2{
+  border-bottom:1px solid #ebebeb;
+}
+.like_total{
+  padding-bottom: 20px;
+}
+.like_total .like_icon{
+  width: 80px;
+  height: 80px;
+  border-radius: 50px;
+  background: #FFEB3B;
+  margin: 0 auto;
+  position: relative;
+}
+.like_num{
+  padding-top: 10px;
+}
+.like_total span.icon-star-full,
+.like_total span.like_w{
+  position: absolute;
+  color: #fff;
+}
+.like_total span.icon-star-full{
+  top: 15px;
+  left: 30px;
+  font-size: 20px;
+  font-weight: bold;
+}
+.like_total span.like_w{
+  top: 40px;
+  left: 25px;
+}
+.like_num{
+  text-align: center;
+}
+.like_num span.like_num_color{
+  color: #FFEB3B;
+}
+.like_people>ul>li{
+  float: left;
+  position: relative;
+  width: 20%;
+}
+.like_people>ul>li:after{
+  content: "";
+  display: block;
+  padding-top: 100%;
+}
+.like_people>ul>li>img{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  padding: 5%;
+}
+.like_more{
+  margin: 0 auto;
+  width: 40%;
+}
+.like_more>a{
+  display: block;
+  text-align: center;
+  border: 2px solid #DC4E41;
+  border-radius: 4px;
+  font-size: 16px;
+  line-height: 32px;
+  color: #DC4E41;
+}
+.like_btn{
+  height: 50px;
+  background: #F2F5F7;
+  margin-top: 20px;
+  text-align: center;
+}
+.like_btn a{
+  display: inline-block;
+  color: #aaa;
+  font-size: 16px;
+  padding-top:15px;
+}

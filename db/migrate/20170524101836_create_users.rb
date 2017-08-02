@@ -1,6 +1,6 @@
 class CreateUsers < ActiveRecord::Migration
   def change
-    create_table :users do |t|
+    create_table :user do |t|
       t.string :phone, unique: true, limit: 20
       t.string :password_digest
       t.string :remeber_digest

@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  before_action :check_login
+  before_action :check_login#, except: :favorite
 
   def index
     @head_title = "我的页面"
@@ -7,6 +7,7 @@ class HomeController < ApplicationController
 
   def list
     @head_title = "我的展示"
+    @posts = Post.where(check_flag: Post::EDIT_FLAG)
   end
 
   def edit
@@ -37,6 +38,21 @@ class HomeController < ApplicationController
       else
         set_json_error({message: up.errors.full_messages.join(",")})
       end
+      format.json { render_to_json }
+    end
+  end
+
+  def favorite
+    uf = UserFavorite.find_by(user_id: current_user.id, post_id: params[:id])
+    if uf.nil?
+      UserFavorite.create(user_id: current_user.id, post_id: params[:id])
+      set_json_success({value: "add"})
+    else
+      uf.delete
+      set_json_success({value: "delete"})
+    end
+
+    respond_to do |format|
       format.json { render_to_json }
     end
   end

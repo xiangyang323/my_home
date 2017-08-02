@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  belongs_to :user_profile, foreign_key: :user_id, primary_key: :user_id
+  has_many :user_favorite
 
   # 新创建的一个,没有填任何内容
   NEW_FLAG = 0
@@ -61,5 +63,46 @@ class Post < ApplicationRecord
 
   def check_img(image)
     ("upload_image.png" == self.try(image).url(:medium))? true:false
+  end
+
+  def get_init_img
+    img_url = "noimage.png"
+    if !check_img("avatar1")
+      img_url = get_avatar_img(:medium, "avatar1")
+    elsif !check_img("avatar2")
+      img_url = get_avatar_img(:medium, "avatar2")
+    elsif !check_img("avatar3")
+      img_url = get_avatar_img(:medium, "avatar3")
+    end
+    return img_url
+  end
+
+  def get_total_img
+    tatal_img = 0
+    tatal_img += 1 if !check_img("avatar1")
+    tatal_img += 1 if !check_img("avatar2")
+    tatal_img += 1 if !check_img("avatar3")
+    return tatal_img
+  end
+
+  def get_room
+    "#{self.room_cnt}室#{self.living_room_cnt}厅#{self.toilet_cnt}卫#{self.kitchen_cnt}厨"
+  end
+
+  def get_view_count
+    PostAccessLog.view_count(self.id)
+  end
+
+  def get_address
+    "#{self.province}#{self.city}#{self.district}#{self.detail_address}"
+  end
+
+  def check_favorite?
+    uf = UserFavorite.find_by(user_id: self.user_id, post_id: self.id)
+    return uf.nil?? false:true
+  end
+
+  def total_favorite
+    self.user_favorite.count
   end
 end

@@ -9,7 +9,6 @@ class SessionController < ApplicationController
         log_in(user) #SessionsHelper中的方法
         #判断是否要持续性的记住用户的登录状态
         params[:session][:remeber_me] == "1" ? remeber(user) : forget(user)
-        p current_user
         redirect_to home_path
       else
         flash[:notice] = "密码或者手机号不对"

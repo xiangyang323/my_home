@@ -2,6 +2,7 @@ module SessionHelper
   #一旦账号密码正确，则成功登录，同时在session中记录session[:user_id]
   def log_in(user)
     session[:user_id] = user.id
+    cookies.signed[:user_info] = {value:user.id}
     user.login_at = Time.now.to_s(:db)
     user.ip = request.remote_ip
     user.save
@@ -50,6 +51,7 @@ module SessionHelper
   def log_out
     forget(current_user)
     session.delete(:user_id)
+    cookies.delete(:user_info)
     @current_user = nil
   end
 

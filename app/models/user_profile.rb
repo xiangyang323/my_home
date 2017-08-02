@@ -1,5 +1,7 @@
 class UserProfile < ApplicationRecord
   belongs_to :user, foreign_key: :user_id
+  has_many :post
+  has_many :user_favorite
 
   validates_presence_of :user_name, :user_id
   validates_uniqueness_of :user_name

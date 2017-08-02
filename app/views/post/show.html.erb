@@ -1,0 +1,115 @@
+<div class="case_wrapper">
+  <div class="case_head">
+    <div class="clearfix">
+      <div class="case_pic">
+        <%=image_tag @post.get_init_img%>
+        <span>共<%=@post.get_total_img%>张</span>
+      </div>
+      <div class="case_info">
+        <div class="case_title">
+          <p><%=@post.title%></p>
+        </div>
+        <div class="case_intro">
+          <span><%=@post.get_room%></span>&nbsp;
+          <span><%=@post.home_size%>平米</span>
+          <!--<span>现代/简约</span>-->
+        </div>
+        <div class="case_visit">
+          <span>月浏览<%=@post.get_view_count%>次</span>&nbsp;
+          <span>距离2.0km</span>
+          <!--<span>由&nbsp;<%#=link_to @post.user_profile.try(:user_name)%>&nbsp;发布</span>-->
+        </div>
+      </div>
+    </div>
+    <%if !@post.get_address.blank?%>
+    <div class="case_location">
+      <span class="icon-location2"></span>
+      <span><%=@post.get_address%></span>
+      <span class="icon-phone"></span>
+    </div>
+    <%end%>
+  </div>
+  <div class="design_all">
+    <div class="service_brand">
+      <div class="brand_title"><p>─── 服务品牌 ───</p></div>
+      <div class="brand_pic">
+        <ul class="clearfix">
+          <span class="icon-chevron-thin-left"></span>
+          <li><img src="../images/u.jpg"></li>
+          <li><img src="../images/u.jpg"></li>
+          <li><img src="../images/u.jpg"></li>
+          <span class="icon-chevron-thin-right"></span>
+        </ul>
+      </div>
+    </div>
+    <div class="design">
+      <div class="designer clearfix">
+        <div class="brand_title2"><p>─── 案例详情 ───</p></div>
+        <div class="design_area">
+          <div class="designer_pic">
+            <%=image_tag @post.user_profile.get_avatar_img("medium")%>
+          </div>
+          <div class="designer_info">
+            <span class="designer_name"><%=@post.user_profile.try(:user_name)%></span>
+            <span><%=@post.user_profile.get_motto%></span>
+            <span class="icon-phone"></span>
+          </div>
+        </div>
+      </div>
+      <div class="design_detail">
+        <span class="title"><%=@post.title%></span>
+        <%if !@post.check_img("avatar1")%>
+        <div class="design_pic">
+          <%=image_tag @post.get_avatar_img(:medium, "avatar1")%>
+        </div>
+        <%end%>
+        <div class="design_word">
+          <p><%=@post.content1%></p>
+        </div>
+        <%if !@post.check_img("avatar2")%>
+            <div class="design_pic">
+              <%=image_tag @post.get_avatar_img(:medium, "avatar2")%>
+            </div>
+        <%end%>
+        <div class="design_word">
+          <p><%=@post.content2%></p>
+        </div>
+        <%if !@post.check_img("avatar3")%>
+            <div class="design_pic">
+              <%=image_tag @post.get_avatar_img(:medium, "avatar3")%>
+            </div>
+        <%end%>
+        <div class="design_word">
+          <p><%=@post.content3%></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="like">
+      <div class="like_total">
+        <div class="like_icon" onclick="addFavorite('<%=@post.id%>')">
+          <span class="icon-star-full"></span>
+          <span class="like_w"><%=@post.check_favorite?? "取消收藏":"收藏"%></span>
+        </div>
+        <div class="like_num">
+          <span>已有<span class="like_num_color"><%=@post.total_favorite%></span>人收藏</span>
+        </div>
+      </div>
+      <div class="like_people">
+        <ul class="people_pic clearfix">
+          <%@post.user_favorite.limit(6).each do |uf|%>
+          <li><%=image_tag(uf.user_profile.get_avatar_img("medium"))%></li>
+          <%end%>
+        </ul>
+      </div>
+      <div class="like_more">
+        <a href="">更多收藏者</a>
+      </div>
+    </div>
+    <div class="like_btn">
+      <a href="">收藏</a>
+      <a href="">转发</a>
+    </div>
+  </div>
+</div>

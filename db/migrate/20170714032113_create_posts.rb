@@ -8,13 +8,13 @@ class CreatePosts < ActiveRecord::Migration[5.0]
       t.string :detail_address, limit: 80
       t.string :building, limit: 30
       # 住室
-      t.integer :room_cnt
+      t.integer :room_cnt, default: 0
       # 客厅
-      t.integer :living_room_cnt
+      t.integer :living_room_cnt, default: 0
       # 卫生间
-      t.integer :toilet_cnt
+      t.integer :toilet_cnt, default: 0
       # 厨房
-      t.integer :kitchen_cnt
+      t.integer :kitchen_cnt, default: 0
       # 房屋大小
       t.integer :home_size
 
@@ -24,8 +24,8 @@ class CreatePosts < ActiveRecord::Migration[5.0]
       t.text :content2
       t.text :content3
 
-      t.integer :check_flag, defalut: 0, limit: 4
-      t.integer :status, defalut: 1, limit: 4
+      t.integer :check_flag, default: 0, limit: 4
+      t.integer :status, default: 0, limit: 4
 
       t.timestamps null: false
     end

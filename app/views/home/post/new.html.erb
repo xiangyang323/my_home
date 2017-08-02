@@ -1,9 +1,10 @@
 <div class="md_card">
   <div class="md_box">
     <%=form_for @post, url: home_post_new_path, method: "post" do |f|%>
+        <%= hidden_field_tag(:id, params[:id]) %>
         <div class="box_text mb20">
           <p>案例标题</p>
-          <%=f.text_field :title, class: "text"%>
+          <%=f.text_field :title, class: "text", required:true%>
         </div>
         <div class="box_text mb20">
           <p>案例位置</p>
@@ -54,7 +55,7 @@
             <%=f.text_area :content1, class: "text"%>
           </div>
 
-          <div id="add_content2" onclick="showContent(2)" style="<%=@post.avatar2.nil?? '':'display: none'%>">+添加详情</div>
+          <div id="add_content2" onclick="showContent(2)" style="<%=@post.check_img("avatar2")? '':'display: none'%>">+添加详情</div>
           <div id="content2" style="<%=@post.check_img("avatar2")? 'display: none':''%>">
             <%=image_tag @post.get_avatar_img(:medium, "avatar2"), id:"avatar2", width:"100%", onclick:"$('#file_avatar2').trigger('click')"%>
             <input type="file" id="file_avatar2" onchange="uploadPostImage(this)" style="display: none">

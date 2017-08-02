@@ -5,8 +5,13 @@ class Home::PostController < HomeController
   end
 
   def new
-    @head_title = "发布案例"
-    @post = Post.find_or_create_by(check_flag: Post::NEW_FLAG, user_id: current_user.id)
+    if params[:id].blank?
+      @head_title = "新建案例"
+      @post = Post.find_or_create_by(check_flag: Post::NEW_FLAG, user_id: current_user.id)
+    else
+      @head_title = "编辑案例"
+      @post = Post.find_by(id: params[:id])
+    end
     @brands = Brand.all
     if request.post?
       @post.attributes = params.require(:post).permit(:title, :building, :province, :city, :district, :detail_address, :room_cnt, :living_room_cnt, :toilet_cnt, :kitchen_cnt, :home_size, :content1, :content2, :content3)
