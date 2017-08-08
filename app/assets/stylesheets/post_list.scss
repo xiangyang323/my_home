@@ -1,0 +1,82 @@
+.post_new .post_btn{
+  width: 30%;
+  background: #1B83D3;
+  border-radius: 4px;
+  text-align: center;
+  margin-left: 70%;
+}
+.post_new .post_btn>a{
+  color: #fff;
+  font-size: 16px;
+  line-height: 32px;
+}
+.post_brand_title{
+  font-size: 16px;
+}
+.post_new .state{
+  margin-bottom: 10px;
+}
+.post_info{
+  padding-top: 10px;
+  border-top: 1px solid #ccc;
+}
+.post_info .post_pic{
+  width: 50%;
+  height: 100px;
+  position: relative;
+}
+.post_info .post_pic>img{
+  width: 100%;
+  height: 100px;
+}
+.post_pic span{
+  width: 100%;
+  height: 25px;
+  background: #000;
+  opacity: 0.6;
+  color: #fff;
+  text-align: right;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.post_pic,.post_title{
+  float: left;
+}
+.post_title span{
+  display: block;
+}
+.post_detail{
+  position: relative;
+}
+.post_sub{
+  position: absolute;
+  bottom: 0;
+  right: 1%;
+}
+.post_title{
+  width: 45%;
+  margin-left: 5%;
+}
+.post_title .post_time{
+  //text-align: right;
+  color: #aaa;
+}
+.post_title .pic_title{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow:ellipsis;
+}
+.post_title span.pic_title{
+  font-size: 16px;
+}
+.post_sub a{
+  background: #1B83D3;
+  color: #fff;
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+
+.state span.active {
+  color: red;
+}

@@ -1,0 +1,73 @@
+<div class="release_activity">
+  <%=form_for @activity, url: home_activity_new_path, method: "post" do |f|%>
+      <%= hidden_field_tag(:id, params[:id]) %>
+  <div class="release_area">
+    <div class="release_pic">
+      <div class="add_pic">
+        <span class="icon-image"></span>
+      </div>
+      <span class="title">活动主图</span>
+      <span class="tips">点击此图即可上传</span>
+      <span class="tips_2">建议长度750*320，3M以内</span>
+    </div>
+    <div class="release_text">
+      <div class="input_a">
+        <span class="icon-star-empty"></span>
+        <%=f.text_field :title, class: "text", required: true, placeholder: "活动名称（必填）"%>
+      </div>
+    </div>
+  </div>
+  <div class="release_detail">
+    <div class="release_detail_1">
+      <div class="input_a">
+        <span class="icon-star-empty"></span>
+        <%=f.text_field :start_time, class: "text", id:"start_time", required: true, placeholder: "活动现场-开始时间（必填）"%>
+      </div>
+      <div class="input_a">
+        <span class="icon-star-empty"></span>
+        <%=f.text_field :end_time, class: "text", id:"end_time", required: true, placeholder: "活动现场-结束时间（必填）"%>
+      </div>
+      <div class="input_a">
+        <span class="icon-star-empty"></span>
+        <input placeholder="活动地址（必填）" class="text" type="text">
+      </div>
+      <div class="input_a">
+        <span class="icon-star-empty"></span>
+        <%=f.text_field :phone, class: "text", required: true, placeholder: "咨询电话（必填）"%>
+      </div>
+    </div>
+  </div>
+  <div class="release_btn">
+    <div class="add_info_btn">
+      <span class="icon-cog"></span>
+      <span>添加内容</span>
+    </div>
+    <div class="release_post">
+      <a href="javascript:;" onclick="$('form').submit()">立即发布</a>
+    </div>
+  </div>
+  <%end%>
+</div>
+<script type="text/javascript">
+  $(function () {
+    var currYear = (new Date()).getFullYear();
+    var opt={};
+    opt.date = {preset : 'date'};
+    opt.datetime = {preset : 'datetime'};
+    opt.time = {preset : 'time'};
+    opt.default = {
+      theme: 'android-ics light', //皮肤样式
+      display: 'modal', //显示方式
+      mode: 'scroller', //日期选择模式
+      dateFormat: 'yyyy-mm-dd',
+      lang: 'zh',
+      showNow: true,
+      nowText: "今天",
+      startYear: currYear - 50, //开始年份
+      endYear: currYear + 10 //结束年份
+    };
+    $("#start_time").mobiscroll($.extend(opt['datetime'], opt['default']));
+    $("#end_time").mobiscroll($.extend(opt['datetime'], opt['default']));
+
+  });
+</script>
