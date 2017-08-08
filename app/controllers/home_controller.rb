@@ -5,11 +5,6 @@ class HomeController < ApplicationController
     @head_title = "我的页面"
   end
 
-  def list
-    @head_title = "我的展示"
-    @posts = Post.where(check_flag: Post::EDIT_FLAG)
-  end
-
   def edit
     @head_title = "编辑"
     @user_profile = current_user.user_profile

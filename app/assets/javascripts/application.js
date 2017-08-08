@@ -14,6 +14,8 @@
 //= require jquery_ujs
 // require turbolinks
 //= require jquery.validate.min
+//= require mobiscroll_date
+//= require mobiscroll
 //= require js.cookie.js
 //= require distpicker
 //= require_tree .

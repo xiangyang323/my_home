@@ -1,40 +1,40 @@
-class Home::PostController < HomeController
+class Home::ActivityController < HomeController
 
   def index
 
   end
 
   def list
-    @head_title = "我的展示"
-    @posts = Post.where(check_flag: Post::EDIT_FLAG, user_id: current_user.id)
+    @head_title = "我的活动"
+    @activities = Activity.where(user_id: current_user.id, check_flag: Activity::EDIT_FLAG)
   end
 
   def new
     if params[:id].blank?
       @head_title = "新建活动"
-      @post = Post.find_or_create_by(check_flag: Post::NEW_FLAG, user_id: current_user.id)
+      @activity = Activity.find_or_create_by(check_flag: Activity::NEW_FLAG, user_id: current_user.id)
     else
       @head_title = "编辑活动"
-      @post = Post.find_by(id: params[:id])
+      @activity = Activity.find_by(id: params[:id])
     end
-    @brands = Brand.all
+    # @brands = Brand.all
     if request.post?
-      @post.attributes = params.require(:post).permit(:title, :building, :province, :city, :district, :detail_address, :room_cnt, :living_room_cnt, :toilet_cnt, :kitchen_cnt, :home_size, :content1, :content2, :content3)
-      @post.check_flag = Post::EDIT_FLAG
-      if !@post.valid?
-        flash[:notice] = @post.errors.full_messages
+      @activity.attributes = params.require(:activity).permit(:title, :province, :city, :district, :detail_address, :phone, :start_time, :end_time)
+      @activity.check_flag = Activity::EDIT_FLAG
+      if !@activity.valid?
+        flash[:notice] = @activity.errors.full_messages
         p flash[:notice]
       else
-        @post.save
-        return redirect_to home_post_list_path
+        @activity.save
+        return redirect_to home_activity_list_path
       end
     end
   end
 
   def delete
-    post = Post.find_by(id: params[:id], user_id: current_user.id)
+    post = Post.find_by(id: params[:id])
     post.delete
-    return redirect_to home_post_list_path
+    return redirect_to home_list_path
   end
 
   def upload_image

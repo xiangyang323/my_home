@@ -6,28 +6,28 @@ class Post < ApplicationRecord
   NEW_FLAG = 0
   # 有内容, 为编辑状态
   EDIT_FLAG = 1
-  # 发布状态
+  # 完成状态
   PUB_FLAG = 2
 
   has_attached_file :avatar1,
                     styles: { large: "400x400#", medium: "200x200#", thumb: "100x100#" },
                     default_url: "upload_image.png",
-                    path: 'public/system/:id/avatar1/:hash.:extension',
-                    url: '/system/:id/avatar1/:hash.:extension',
+                    path: 'public/post_imamge/:id/avatar1/:hash.:extension',
+                    url: '/post_imamge/:id/avatar1/:hash.:extension',
                     hash_secret: "longSecretString"
 
   has_attached_file :avatar2,
                     styles: { large: "400x400#", medium: "200x200#", thumb: "100x100#" },
                     default_url: "upload_image.png",
-                    path: 'public/system/:id/avatar2/:hash.:extension',
-                    url: '/system/:id/avatar2/:hash.:extension',
+                    path: 'public/post_imamge/:id/avatar2/:hash.:extension',
+                    url: '/post_imamge/:id/avatar2/:hash.:extension',
                     hash_secret: "longSecretString"
 
   has_attached_file :avatar3,
                     styles: { large: "400x400#", medium: "200x200#", thumb: "100x100#" },
                     default_url: "upload_image.png",
-                    path: 'public/system/:id/avatar3/:hash.:extension',
-                    url: '/system/:id/avatar3/:hash.:extension',
+                    path: 'public/post_imamge/:id/avatar3/:hash.:extension',
+                    url: '/post_imamge/:id/avatar3/:hash.:extension',
                     hash_secret: "longSecretString"
 
   validates_attachment_content_type :avatar1, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
@@ -63,6 +63,14 @@ class Post < ApplicationRecord
 
   def check_img(image)
     ("upload_image.png" == self.try(image).url(:medium))? true:false
+  end
+
+  def is_edit?
+    self.check_flag == EDIT_FLAG
+  end
+
+  def is_pub?
+    self.check_flag == PUB_FLAG
   end
 
   def get_init_img

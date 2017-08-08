@@ -1,0 +1,36 @@
+<div class="md_card">
+  <div class="md_box">
+    <div class="post_new">
+      <div class="post_btn">
+        <%= link_to "发布活动", home_activity_new_path%>
+      </div>
+      <div class="post_brand">
+        <p class="post_brand_title">品牌：</p>
+        <div class="state">
+          <span>状态：</span>
+          <%#=link_to "已完成", {controller: :home, action: :list, flag: Post::PUB_FLAG}, {method: :post}%>
+          <span class="state_a active"></span>
+          <span class="state_b">草稿</span>
+        </div>
+      </div>
+    </div>
+    <%@activities.each do |activity|%>
+        <div class="post_info">
+          <div class="post_detail clearfix">
+            <div class="post_pic" onclick="window.location.href='<%#=activity_path%>'">
+              <%=image_tag "noimage.png"%>
+            </div>
+            <div class="post_title">
+              <span class="pic_title"><%=link_to activity.title, ""%></span>
+              <span class="post_time"><%=activity.updated_at.to_s()%></span>
+            </div>
+            <div class="post_sub">
+              <%#=show_post_btn(post)%>
+              <%=link_to "编辑", home_activity_edit_path(activity)%>
+              <%#=link_to "删除", home_post_delete_path(post), {method: :delete, data: {confirm: "确定删除?"},}%>
+            </div>
+          </div>
+        </div>
+    <%end%>
+  </div>
+</div>
