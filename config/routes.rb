@@ -37,7 +37,8 @@ Rails.application.routes.draw do
 
   get "home/brand/new", to: "home/brand#new", as: :new_brand
   post "home/brand/new", to: "home/brand#new"
-  get "home/brand/list", to: "home/brand#list", as: :list_brand
+  get "home/brand/:type", to: "home/brand#list", as: :list_brand
+  get "home/brand/operate", to: "home/brand#operate", as: :operate_brand
 
   post '/home/upload/create', to: 'home/upload#create'
   post '/home/upload/:id/update', to: 'home/upload#update', :constraints => {:id => /\d+/}
