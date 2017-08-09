@@ -1,19 +1,20 @@
 <div id="model_join_activity">
   <a class="btn_close" href="javascript:;" onclick="hideModel('model_join_activity')">×</a>
-  <form>
-    <p>请输入您的基本信息</p>
-    <div class="box_text mb20">
-      <input type="text" placeholder="请输入您的姓名">
-    </div>
-    <div class="box_text mb20">
-      <input type="tel" placeholder="请输入手机号码">
-    </div>
-    <div class="box_text mb20">
-      <input type="number" placeholder="请输入手机验证码">
-    </div>
+  <%=form_for @activity_user, url: activity_join_path, method: "post", remote: true do |f|%>
+      <p>请输入您的基本信息</p>
+      <%= hidden_field :activity_user, :activity_id, value: @activity_user.activity_id%>
+      <div class="box_text mb20">
+        <%=f.text_field :user_name, class: "text", placeholder:"请输入您的姓名", required:true%>
+      </div>
+      <div class="box_text mb20">
+        <%=f.text_field :phone, class: "text", placeholder:"请输入手机号码", required:true%>
+      </div>
+    <!--<div class="box_text mb20">-->
+      <!--<input type="number" placeholder="请输入手机验证码">-->
+    <!--</div>-->
     <div class="box_text mb20 text_center">
       <input type="submit" value="确定" class="btn_submit">
-      <input type="reset" value="取消" class="btn_cancel">
+      <span class="btn_cancel" onclick="hideModel('model_join_activity')">取消</span>
     </div>
-  </form>
+  <%end%>
 </div>

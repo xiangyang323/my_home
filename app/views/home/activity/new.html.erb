@@ -26,10 +26,10 @@
       <div class="input_a" onclick="showModel('model_address')">
         <span class="icon-star-empty"></span>
         <input id="tmp_address" placeholder="活动地址（必填）" value="<%=@activity.get_address%>" required="true" class="text" type="text">
-        <%= hidden_field_tag(:province, @activity.province) %>
-        <%= hidden_field_tag(:city, @activity.city) %>
-        <%= hidden_field_tag(:district, @activity.district) %>
-        <%= hidden_field_tag(:detail_address, @activity.detail_address) %>
+        <%= hidden_field :activity, :province, value: @activity.province, id: "province"%>
+        <%= hidden_field :activity, :city, value: @activity.city, id: "city"%>
+        <%= hidden_field :activity, :district, value: @activity.district, id: "district"%>
+        <%= hidden_field :activity, :detail_address, value: @activity.detail_address, id: "detail_address"%>
       </div>
       <div class="input_a">
         <span class="icon-star-empty"></span>

@@ -1,6 +1,7 @@
 class Activity < ApplicationRecord
   belongs_to :user_profile, foreign_key: :user_id, primary_key: :user_id
   has_many :user_favorite
+  has_many :activity_user
 
   # 新创建的一个,没有填任何内容
   NEW_FLAG = 0
