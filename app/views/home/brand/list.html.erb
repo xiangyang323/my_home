@@ -1,11 +1,31 @@
 <div class="brand_list">
-  <ul>
-    <%@brands.each do |brand|%>
-    <li class="">
-      <%= image_tag Upload.get_avatar(brand.logo,"thumb" ) %>
-      <br>
-      <%= brand.name%>
-    </li>
-    <%end%>
-  </ul>
+  <div>
+    <ul class="list_menu">
+      <li><a href="/home/brand/1">已绑定</a></li>
+      <li><a href="/home/brand/0">未绑定</a></li>
+    </ul>
+  </div>
+
+  <div class="md_card">
+    <div class="md_box">
+      <ul>
+        <% @brands.each do |brand| %>
+            <div class="post_info">
+              <div class="post_detail clearfix">
+                <div class="post_pic">
+                  <%= image_tag Upload.get_avatar(brand.logo, "thumb") %>
+                </div>
+                <div class="post_title">
+                  <span class="pic_title"><%= brand.name %></span>
+                  <span class="post_time"><%= brand.updated_at.strftime("") %></span>
+                </div>
+                <div class="post_sub">
+                  <%= link_to "绑定", operate_brand_path(brand) %>
+                </div>
+              </div>
+            </div>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 </div>
