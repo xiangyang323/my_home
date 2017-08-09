@@ -16,7 +16,7 @@ class Brand < ApplicationRecord
         user_brands = UserBrand.where(user_id: user_id)
         brands = self.where(id: user_brands.map(&:brand_id))
       when NO_BIND
-        brands = self.where("id not in (select brand_id from user_brands where user_id != #{user_id})")
+        brands = self.where("id not in (select brand_id from user_brands where user_id = #{user_id})")
       else
         brands = self.all
     end

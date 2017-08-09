@@ -10,7 +10,7 @@ class Home::BrandController < HomeController
       if @brand.valid?
         @brand.save
         UserBrand.create(user_id: current_user.id, brand_id: @brand.id)
-        redirect_to :list
+        redirect_to :list, type: Brand::HAVE_BIND
       else
         p @brand.errors
       end
@@ -19,8 +19,8 @@ class Home::BrandController < HomeController
 
  ##品牌列表
   def list
-    type = params[:type].blank? ? Brand::HAVE_BIND : params[:type].to_i
-    @brands = Brand.get_brands(current_user.id,type)
+    @type = params[:type].blank? ? Brand::HAVE_BIND : params[:type].to_i
+    @brands = Brand.get_brands(current_user.id, @type)
   end
 
   ##绑定品牌
@@ -29,26 +29,30 @@ class Home::BrandController < HomeController
     if request.xhr?
       brand_id = params[:brand_id]
       user_id = current_user.id
+      type = params[:type]
 
       max_count = 20
 
-      count = UserBrand.where(user_id: user_id, brand_id: brand_id).count
-
       user_brand = UserBrand.where(user_id: user_id, brand_id: brand_id).first
-      if count < max_count
+      ##解除绑定 type=1
+      if type.to_i == Brand::HAVE_BIND
         if user_brand.blank?
-          user_brand = UserBrand.create(user_id: user_id, brand_id: brand_id)
-          data[:status] = 1 ##绑定成功
+          data[:status] = -1 ##解除失败
         else
           user_brand.destroy
-          data[:status] = 2 ##解除成功
+          data[:status] = 1 ##解除成功
         end
       else
         if user_brand.blank?
-          data[:status] = 0 ##添加失败，超过限制
+          count = UserBrand.where(user_id: user_id, brand_id: brand_id).count
+          if count < max_count
+            user_brand = UserBrand.create(user_id: user_id, brand_id: brand_id)
+            data[:status] = 2 ##绑定成功
+          else
+            data[:status] = 0 ##绑定失败，超过数目
+          end
         else
-          user_brand.destroy
-          data[:status] = 2 ##解除成功
+          data[:status] = -1 ##绑定失败
         end
       end
     end

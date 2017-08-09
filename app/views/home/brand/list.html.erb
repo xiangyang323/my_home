@@ -1,31 +1,29 @@
 <div class="brand_list">
-  <div>
-    <ul class="list_menu">
-      <li><a href="/home/brand/1">已绑定</a></li>
-      <li><a href="/home/brand/0">未绑定</a></li>
-    </ul>
-  </div>
+  <ul class="list_menu">
+    <li <%= "class=selected" if @type == 1 %>><a href="/home/brand/1">已绑定</a></li>
+    <li <%= "class=selected" if @type == 0 %>><a href="/home/brand/0">未绑定</a></li>
+  </ul>
 
-  <div class="md_card">
-    <div class="md_box">
-      <ul>
-        <% @brands.each do |brand| %>
-            <div class="post_info">
-              <div class="post_detail clearfix">
-                <div class="post_pic">
-                  <%= image_tag Upload.get_avatar(brand.logo, "thumb") %>
-                </div>
-                <div class="post_title">
-                  <span class="pic_title"><%= brand.name %></span>
-                  <span class="post_time"><%= brand.updated_at.strftime("") %></span>
-                </div>
-                <div class="post_sub">
-                  <%= link_to "绑定", operate_brand_path(brand) %>
-                </div>
+  <div class="brand_list_info">
+      <% @brands.each do |brand| %>
+          <div class="post_info" id="brand_info_<%= brand.id%>">
+            <div class="post_detail clearfix">
+              <div class="post_pic">
+                <%= image_tag Upload.get_avatar(brand.logo, "thumb") %>
+              </div>
+              <div class="post_title">
+                <span class="pic_title"><%= brand.name %></span>
+                <span class="post_time"><%= brand.updated_at.strftime("") %></span>
+              </div>
+              <div class="post_sub">
+                <%if @type ==  Brand::NO_BIND%>
+                  <%= link_to "绑定品牌", "javascript:void(0)", onclick: "operateBrand(#{brand.id}, #{Brand::NO_BIND})" %>
+                <%else%>
+                  <%= link_to "解除绑定", "javascript:void(0)", onclick: "operateBrand(#{brand.id}, #{Brand::HAVE_BIND})" %>
+                <%end%>
               </div>
             </div>
-        <% end %>
-      </ul>
+          </div>
+      <% end %>
     </div>
-  </div>
 </div>

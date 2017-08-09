@@ -27,7 +27,23 @@
     font-size: 14px;
 }
 
-.brand_list ul li{
-    margin-bottom: 1%;
+/*brand_list*/
+.brand_list ul.list_menu{
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.brand_list ul.list_menu li a{
+    width: 50%;
+    height: 32px;
+    line-height: 32px;
     text-align: center;
+    float: left;
+}
+.brand_list ul.list_menu li.selected a{
+    background: #1B83D3;
+    color: #fff;
+}
+.brand_list .post_info{
+    padding: 10px;
 }

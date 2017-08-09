@@ -89,3 +89,29 @@ function hideModel(close_id){
   $(".common_modal").hide();
   $("#" + close_id).hide();
 }
+
+//绑定品牌
+//type=1 已绑定的品牌 type=0 未绑定品牌
+function operateBrand(brandId,type){
+    if(type == null) return;
+    var brand = $("#brand_info_" + brandId);
+    if(brandId != null && brand.length > 0) {
+        var url = '/home/brand/operate/' + brandId + '/' + type;
+        $.get(url,
+            function (data) {
+                if (data.status > 0) {
+                    //添加
+                    if (data.status == 1 || data.status == 2) {
+                        alert("操作成功!");
+                        brand.fadeOut(2000);
+                    } else if (data.status == -1) {
+                        alert("操作失败,请稍后重试!");
+                        return;
+                    }
+                } else if (data.status == 0) {
+                    alert("绑定品牌最多为20条,请解除后重试!");
+                    return;
+                }
+            });
+    }
+}
