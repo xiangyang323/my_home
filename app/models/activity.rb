@@ -43,4 +43,12 @@ class Activity < ApplicationRecord
       self.avatar2.instance_write(:file_name, "#{SecureRandom.hex(16)}#{extension}")
     end
   end
+
+  def get_avatar_img(style, image="avatar1")
+    return self.try(image).url(style)
+  end
+
+  def check_img(image)
+    ("upload_image.png" == self.try(image).url(:medium))? true:false
+  end
 end

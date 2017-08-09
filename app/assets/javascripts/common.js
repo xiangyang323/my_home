@@ -32,6 +32,8 @@ function uploadImage(fileObj, url, upLoadImageId, imageStr){
     success: function(data, status){
       if(data.url != undefined){
         $(upLoadImageId).attr("src", data.url);
+        $(upLoadImageId).show();
+        $(upLoadImageId + "_addbtn").hide();
       }
     },
     error: function(data, status, e){

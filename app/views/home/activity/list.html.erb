@@ -18,7 +18,7 @@
         <div class="post_info">
           <div class="post_detail clearfix">
             <div class="post_pic" onclick="window.location.href='<%#=activity_path%>'">
-              <%=image_tag "noimage.png"%>
+              <%=image_tag activity.get_avatar_img(:medium)%>
             </div>
             <div class="post_title">
               <span class="pic_title"><%=link_to activity.title, ""%></span>

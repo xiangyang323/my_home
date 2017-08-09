@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   post "home/post/new", to: "home/post#new"
   get "home/post/new/:id", to: "home/post#new", as: :home_post_edit
   post "home/post/new/:id", to: "home/post#new"
+  post "home/post/change_flag/:id", to: "home/post#change_flag"
   delete "home/post/delete/:id", to: "home/post#delete", as: :home_post_delete
   post "home/post/upload_image", to: "home/post#upload_image"
 
@@ -32,8 +33,9 @@ Rails.application.routes.draw do
   post "home/activity/list", to: "home/activity#list"
   get "home/activity/new", to: "home/activity#new"
   post "home/activity/new", to: "home/activity#new"
-  get "home/post/activity/:id", to: "home/post#new", as: :home_activity_edit
-  post "home/post/activity/:id", to: "home/post#new"
+  get "home/activity/new/:id", to: "home/activity#new", as: :home_activity_edit
+  post "home/activity/new/:id", to: "home/activity#new"
+  post "home/activity/upload_image", to: "home/activity#upload_image"
 
   get "home/brand/new", to: "home/brand#new", as: :new_brand
   post "home/brand/new", to: "home/brand#new"
