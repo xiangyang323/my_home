@@ -1,0 +1,30 @@
+<div class="marketing">
+  <div class="mar_head">
+    <div class="mar_pic">
+      <%=image_tag @activity.get_avatar_img(:medium)%>
+    </div>
+    <div class="mar_title">
+      <p><%=@activity.title%></p>
+    </div>
+  </div>
+  <div class="mar_detail">
+    <p>活动时间：<%=@activity.start_time.to_s(:ymd_jp)%>-<%=@activity.end_time.to_s(:ymd_jp)%></p>
+    <p class="phone">联系电话：<%=@activity.phone%></p>
+    <p>活动地址：临夏河州会展中心</p>
+  </div>
+
+  <div class="mar_img">
+    <%=image_tag @activity.get_avatar_img(:large, "avatar2")%>
+  </div>
+
+  <div class="mar_footer">
+    <span class="sign_up_num">18人报名</span>
+    <div class="sign_up">
+      <a href="">
+        <span class="icon-star-empty"></span>
+        <span class="sign_up_word">报名</span>
+      </a>
+    </div>
+    <span class="sign_up_btn"><a href="">电话咨询</a></span>
+  </div>
+</div>

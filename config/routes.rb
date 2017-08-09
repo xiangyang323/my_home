@@ -37,6 +37,8 @@ Rails.application.routes.draw do
   post "home/activity/new/:id", to: "home/activity#new"
   post "home/activity/upload_image", to: "home/activity#upload_image"
 
+  get "/activity/:id", to: "activity#show", as: :activity
+
   get "home/brand/new", to: "home/brand#new", as: :new_brand
   post "home/brand/new", to: "home/brand#new"
   get "home/brand/list", to: "home/brand#list", as: :list_brand
@@ -44,7 +46,7 @@ Rails.application.routes.draw do
   post '/home/upload/create', to: 'home/upload#create'
   post '/home/upload/:id/update', to: 'home/upload#update', :constraints => {:id => /\d+/}
 
-  get "post/:id", to: "post#show", as: :post
+  get "/post/:id", to: "post#show", as: :post
 
   get "/favorite/:id", to: "home#favorite", as: :favorite
 

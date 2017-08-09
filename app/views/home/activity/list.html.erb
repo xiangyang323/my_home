@@ -17,11 +17,11 @@
     <%@activities.each do |activity|%>
         <div class="post_info">
           <div class="post_detail clearfix">
-            <div class="post_pic" onclick="window.location.href='<%#=activity_path%>'">
+            <div class="post_pic" onclick="window.location.href='<%=activity_path(activity)%>'">
               <%=image_tag activity.get_avatar_img(:medium)%>
             </div>
             <div class="post_title">
-              <span class="pic_title"><%=link_to activity.title, ""%></span>
+              <span class="pic_title"><%=link_to activity.title, activity_path(activity)%></span>
               <span class="post_time"><%=activity.updated_at.to_s()%></span>
             </div>
             <div class="post_sub">
