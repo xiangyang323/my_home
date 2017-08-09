@@ -394,14 +394,7 @@ div.confirm_area>span{
 }
 
 
-/*model_address*/
-#model_address{
-  min-height: 150px;
-  padding: 10px;
-  position: relative;
-  display: none;
-}
-#model_address .btn_close{
+.common_modal .btn_close{
   position: absolute;
   right: -10px;
   top: -10px;
@@ -414,6 +407,14 @@ div.confirm_area>span{
   color: #333;
   border: 1px solid #e8e8e8;
   border-radius: 14px;
+}
+
+/*model_address*/
+#model_address{
+  min-height: 150px;
+  padding: 10px;
+  position: relative;
+  display: none;
 }
 #model_address > div{
   width: 100%;
@@ -431,4 +432,35 @@ div.confirm_area>span{
   line-height: 30px;
   background: #efefef;
   padding: 0 2%;
+}
+
+/*model_join_activity*/
+#model_join_activity{
+  min-height: 250px;
+  padding: 10px;
+  position: relative;
+}
+#model_join_activity form input{
+  width: 100%;
+  padding: 0 2%;
+  height: 30px;
+  line-height: 30px;
+  background: #e8e8e8;
+}
+#model_join_activity input.btn_submit,
+#model_join_activity input.btn_cancel{
+  width: 45%;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 14px;
+}
+#model_join_activity .text_center{
+  text-align: center;
+}
+#model_join_activity input.btn_submit{
+  background: #1B83D3;
+  margin-right: 5%;
+}
+#model_join_activity input.btn_cancel{
+  background: #d00;
 }

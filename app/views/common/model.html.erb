@@ -4,6 +4,8 @@
         <%=render :partial => "common/map"%>
     <%elsif !@show_address_flag.blank?%>
         <%=render :partial => "common/address"%>
+    <%elsif !@show_join_activity_flag.blank?%>
+    <%=render :partial => "common/join_activity"%>
     <%end%>
   </div>
 </div>
