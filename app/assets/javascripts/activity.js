@@ -30,7 +30,3 @@ function uploadActivityImage(obj){
 function addInfoBtn(){
   $('#file_avatar2').trigger('click');
 }
-
-function showAddress(obj){
-  $(".common_modal").show();
-}

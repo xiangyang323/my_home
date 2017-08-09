@@ -23,9 +23,13 @@
         <span class="icon-star-empty"></span>
         <%=f.text_field :end_time, class: "text", id:"end_time", required: true, placeholder: "活动现场-结束时间（必填）"%>
       </div>
-      <div class="input_a" onclick="showAddress(this)">
+      <div class="input_a" onclick="showModel('model_address')">
         <span class="icon-star-empty"></span>
-        <input placeholder="活动地址（必填）" class="text" type="text">
+        <input id="tmp_address" placeholder="活动地址（必填）" value="<%=@activity.get_address%>" required="true" class="text" type="text">
+        <%= hidden_field_tag(:province, @activity.province) %>
+        <%= hidden_field_tag(:city, @activity.city) %>
+        <%= hidden_field_tag(:district, @activity.district) %>
+        <%= hidden_field_tag(:detail_address, @activity.detail_address) %>
       </div>
       <div class="input_a">
         <span class="icon-star-empty"></span>

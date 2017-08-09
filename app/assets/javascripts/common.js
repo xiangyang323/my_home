@@ -50,3 +50,42 @@ function checkLogin() {
   if (Cookies.get(CK_LOGIN_KEY).length < 33) return false;
   return true;
 }
+
+function modelAddress(){
+  hideModel('model_address');
+
+  var province = $("#model_province").val();
+  var city = $("#model_city").val();
+  var district = $("#model_district").val();
+  var detail_address = $("#model_detail_address").val();
+
+  var tmp_address = "";
+  if(province){
+    tmp_address += province;
+    $("#province").val(province);
+  }
+  if(city){
+    tmp_address += city;
+    $("#city").val(city);
+  }
+  if(district){
+    tmp_address += district;
+    $("#district").val(district);
+  }
+  if(detail_address){
+    tmp_address += detail_address;
+    $("#detail_address").val(detail_address);
+  }
+
+  $("#tmp_address").val(tmp_address);
+}
+
+function showModel(open_id){
+  $(".common_modal").show();
+  $("#" + open_id).show();
+}
+
+function hideModel(close_id){
+  $(".common_modal").hide();
+  $("#" + close_id).hide();
+}

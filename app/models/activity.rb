@@ -51,4 +51,8 @@ class Activity < ApplicationRecord
   def check_img(image)
     ("upload_image.png" == self.try(image).url(:medium))? true:false
   end
+
+  def get_address
+    "#{self.province}#{self.city}#{self.district}#{self.detail_address}"
+  end
 end

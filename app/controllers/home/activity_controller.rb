@@ -20,7 +20,8 @@ class Home::ActivityController < HomeController
     @show_address_flag = true
     # @brands = Brand.all
     if request.post?
-      @activity.attributes = params.require(:activity).permit(:title, :province, :city, :district, :detail_address, :phone, :start_time, :end_time)
+      @activity.attributes = params.require(:activity).permit(:title, :phone, :start_time, :end_time)
+      @activity.attributes = params.permit(:province, :city, :district, :detail_address)
       @activity.check_flag = Activity::EDIT_FLAG
       if !@activity.valid?
         flash[:notice] = @activity.errors.full_messages

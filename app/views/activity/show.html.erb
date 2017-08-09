@@ -10,7 +10,7 @@
   <div class="mar_detail">
     <p>活动时间：<%=@activity.start_time.to_s(:ymd_jp)%>-<%=@activity.end_time.to_s(:ymd_jp)%></p>
     <p class="phone">联系电话：<%=@activity.phone%></p>
-    <p>活动地址：临夏河州会展中心</p>
+    <p>活动地址：<%=@activity.get_address%></p>
   </div>
 
   <div class="mar_img">
@@ -20,7 +20,7 @@
   <div class="mar_footer">
     <span class="sign_up_num">18人报名</span>
     <div class="sign_up">
-      <a href="">
+      <a onclick="showJoinActivity()" href="javascript:;">
         <span class="icon-star-empty"></span>
         <span class="sign_up_word">报名</span>
       </a>
