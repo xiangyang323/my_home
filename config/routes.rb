@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   post "home/activity/upload_image", to: "home/activity#upload_image"
 
   get "/activity/:id", to: "activity#show", as: :activity
+  post "/activity/join", to: "activity#join"
 
   get "home/brand/new", to: "home/brand#new", as: :new_brand
   post "home/brand/new", to: "home/brand#new"

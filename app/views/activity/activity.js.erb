@@ -1,0 +1,6 @@
+<%if action_name == "join"%>
+hideModel("model_join_activity");
+$("#model_message .msg").html("<%=@show_message[:message]%>");
+showModel("model_message");
+$(".sign_up_num").html("<%=@activity.activity_user.count%>人报名")
+<%end%>
