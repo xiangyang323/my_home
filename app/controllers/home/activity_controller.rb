@@ -38,19 +38,19 @@ class Home::ActivityController < HomeController
   end
 
   def upload_image
-    if params[:image_id].blank?
+    if params[:image_id].blank? || params[:activity_id].blank?
       set_json_error({message: "params error"})
     else
-      post = Post.find_or_create_by(check_flag: Post::NEW_FLAG, user_id: current_user.id)
-      post.attributes = params.require(:post).permit(params[:image_id], "#{params[:image_id]}_file_name", "#{params[:image_id]}_content_type", "#{params[:image_id]}_file_size", "#{params[:image_id]}_updated_at")
-      post.try(params[:image_id]).reprocess!
-      if post.valid?
-        post.transaction do
-          post.save
+      activity = Activity.find_by(id: params[:activity_id])
+      activity.attributes = params.require(:activity).permit(params[:image_id], "#{params[:image_id]}_file_name", "#{params[:image_id]}_content_type", "#{params[:image_id]}_file_size", "#{params[:image_id]}_updated_at")
+      activity.try(params[:image_id]).reprocess!
+      if activity.valid?
+        activity.transaction do
+          activity.save
         end
-        set_json_success({url: post.try(params[:image_id]).url(:medium)})
+        set_json_success({url: activity.try(params[:image_id]).url(:medium)})
       else
-        set_json_error({message: post.errors.full_messages.join(",")})
+        set_json_error({message: activity.errors.full_messages.join(",")})
       end
     end
 

@@ -31,6 +31,10 @@ class Home::PostController < HomeController
     end
   end
 
+  def change_flag
+
+  end
+
   def delete
     post = Post.find_by(id: params[:id], user_id: current_user.id)
     post.delete
@@ -38,10 +42,10 @@ class Home::PostController < HomeController
   end
 
   def upload_image
-    if params[:image_id].blank?
+    if params[:image_id].blank? || params[:post_id].blank?
       set_json_error({message: "params error"})
     else
-      post = Post.find_or_create_by(check_flag: Post::NEW_FLAG, user_id: current_user.id)
+      post = Post.find_by(id: params[:post_id])
       post.attributes = params.require(:post).permit(params[:image_id], "#{params[:image_id]}_file_name", "#{params[:image_id]}_content_type", "#{params[:image_id]}_file_size", "#{params[:image_id]}_updated_at")
       post.try(params[:image_id]).reprocess!
       if post.valid?

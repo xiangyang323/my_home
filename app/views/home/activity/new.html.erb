@@ -3,12 +3,8 @@
       <%= hidden_field_tag(:id, params[:id]) %>
   <div class="release_area">
     <div class="release_pic">
-      <div class="add_pic">
-        <span class="icon-image"></span>
-      </div>
-      <span class="title">活动主图</span>
-      <span class="tips">点击此图即可上传</span>
-      <span class="tips_2">建议长度750*320，3M以内</span>
+      <%=image_tag @activity.get_avatar_img(:medium), id:"avatar1", width:"100%", height: "135px", onclick:"$('#file_avatar1').trigger('click')"%>
+      <input type="file" id="file_avatar1" activity_id="<%=@activity.id%>" onchange="uploadActivityImage(this)" style="display: none">
     </div>
     <div class="release_text">
       <div class="input_a">
@@ -38,10 +34,13 @@
     </div>
   </div>
   <div class="release_btn">
-    <div class="add_info_btn">
+    <div class="add_info_btn" id="avatar2_addbtn" style="<%=@activity.check_img("avatar2")? '':'display:none'%>" onclick="addInfoBtn(this)">
       <span class="icon-cog"></span>
       <span>添加内容</span>
     </div>
+    <%=image_tag @activity.get_avatar_img(:medium, "avatar2"), {id:"avatar2", width:"100%", height: "135px", onclick:"$('#file_avatar2').trigger('click')", style: @activity.check_img("avatar2")? 'display:none':''}%>
+    <input type="file" id="file_avatar2" activity_id="<%=@activity.id%>" onchange="uploadActivityImage(this)" style="display: none">
+
     <div class="release_post">
       <a href="javascript:;" onclick="$('form').submit()">立即发布</a>
     </div>

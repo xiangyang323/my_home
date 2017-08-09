@@ -8,7 +8,8 @@ function showContent(id){
 function uploadPostImage(obj){
   var file_id = $(obj).attr("id");
   var image_id = file_id.replace("file_", "");
-  uploadImage(obj, "/home/post/upload_image?image_id=" + image_id, "#" + image_id, "post[" + image_id + "]")
+  var post_id = $(obj).attr("post_id");
+  uploadImage(obj, "/home/post/upload_image?post_id=" + post_id + "&image_id=" + image_id, "#" + image_id, "post[" + image_id + "]")
 }
 
 function addFavorite(post_id){

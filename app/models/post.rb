@@ -12,22 +12,22 @@ class Post < ApplicationRecord
   has_attached_file :avatar1,
                     styles: { large: "400x400#", medium: "200x200#", thumb: "100x100#" },
                     default_url: "upload_image.png",
-                    path: 'public/post_imamge/:id/avatar1/:hash.:extension',
-                    url: '/post_imamge/:id/avatar1/:hash.:extension',
+                    path: 'public/post_image/:id/avatar1/:hash.:extension',
+                    url: '/post_image/:id/avatar1/:hash.:extension',
                     hash_secret: "longSecretString"
 
   has_attached_file :avatar2,
                     styles: { large: "400x400#", medium: "200x200#", thumb: "100x100#" },
                     default_url: "upload_image.png",
-                    path: 'public/post_imamge/:id/avatar2/:hash.:extension',
-                    url: '/post_imamge/:id/avatar2/:hash.:extension',
+                    path: 'public/post_image/:id/avatar2/:hash.:extension',
+                    url: '/post_image/:id/avatar2/:hash.:extension',
                     hash_secret: "longSecretString"
 
   has_attached_file :avatar3,
                     styles: { large: "400x400#", medium: "200x200#", thumb: "100x100#" },
                     default_url: "upload_image.png",
-                    path: 'public/post_imamge/:id/avatar3/:hash.:extension',
-                    url: '/post_imamge/:id/avatar3/:hash.:extension',
+                    path: 'public/post_image/:id/avatar3/:hash.:extension',
+                    url: '/post_image/:id/avatar3/:hash.:extension',
                     hash_secret: "longSecretString"
 
   validates_attachment_content_type :avatar1, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
