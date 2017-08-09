@@ -17,6 +17,7 @@ class Home::ActivityController < HomeController
       @head_title = "编辑活动"
       @activity = Activity.find_by(id: params[:id])
     end
+    @show_address_flag = true
     # @brands = Brand.all
     if request.post?
       @activity.attributes = params.require(:activity).permit(:title, :province, :city, :district, :detail_address, :phone, :start_time, :end_time)
