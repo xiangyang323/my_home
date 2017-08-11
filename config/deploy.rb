@@ -11,11 +11,12 @@ set :branch, 'master'
 set :rvm_type, :user
 set :rvm_ruby_version, 'ruby-2.3.3@my_home'
 # set :rvm_binary, '~/.rvm/bin/rvm'
-set :rvm_binary, '/usr/local/rvm/bin/rvm'
+set :rvm_binary, '/home/xiangyang/.rvm/bin/rvm'
+set :deploy_via, :remote_cache
 
 # Default deploy_to directory is /var/www/my_app_name
 # set :deploy_to, "/var/www/my_app_name"
-set :deploy_to, "/home/xiang/#{fetch(:application)}"
+set :deploy_to, "/home/xiangyang/#{fetch(:application)}"
 set :current, "#{fetch(:deploy_to)}/current"
 
 #set :use_sudo, true
@@ -35,7 +36,7 @@ set :scm, :git
 # set :pty, true
 
 # Default value for :linked_files is []
-# append :linked_files, "config/database.yml", "config/secrets.yml"
+set :linked_files, "config/database.yml", "config/secrets.yml"
 
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
@@ -48,33 +49,21 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 set :keep_releases, 5
 
 namespace :deploy do
-  # desc 'Initial Deploy'
-  # task :initial do
-  #   on roles(:app, :batch) do
-  #     execute "gem install bundle"
-  #   end
-  # end 	
 
-  before :updated, :gems_install do
-    # on roles(:batch) do
-    #   within release_path do
-    #     execute :bundle, :exec, :rake, "db:migrate"
-    #   end
-    # end
-
-    # on roles(:app, :batch) do
-    #   within release_path do
-    #     execute :bundle, :exec, :rake, "assets:precompile"
-    #   end
-    # end
+  desc 'Initial Deploy'
+  task :initial do
+    on roles(:app) do
+      invoke 'deploy'
+    end
   end
 
-  after :finished, :init do
-    on roles(:app, :batch) do
-      within release_path do
-        #没有使用本地mp4地址
-        #execute :sudo, "ln -s /home/kabucom/kabu_video/rakurakuBB_20160926.mp4 /home/kabucom/kabucom_ipo/current/public/kabu_ipo2"
-      	#execute :sudo, "/opt/nginx-1.9.4-passenger-5.0.20/sbin/nginx -s reload"
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+        execute "cd #{current_path}; RAILS_ENV=#{fetch(:stage)} #{fetch(:rvm_binary)} #{fetch(:rvm_ruby_version)} do bundle install"
+        execute "cd #{current_path}; RAILS_ENV=#{fetch(:stage)} #{fetch(:rvm_binary)} #{fetch(:rvm_ruby_version)} do bundle exec rake db:migrate"
+        execute "cd #{current_path}; RAILS_ENV=#{fetch(:stage)} #{fetch(:rvm_binary)} #{fetch(:rvm_ruby_version)} do bundle exec rake assets:precompile"
+
         execute "touch #{fetch(:current)}/tmp/restart.txt"
       end
     end
@@ -116,4 +105,7 @@ namespace :deploy do
   # end
   # after :published, :generate_500_html
 
+  after  :finishing,    :compile_assets
+  after  :finishing,    :cleanup
+  after  :finishing,    :restart
 end

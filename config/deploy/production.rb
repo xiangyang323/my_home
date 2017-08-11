@@ -59,3 +59,18 @@
 #     auth_methods: %w(publickey password)
 #     # password: "please use keys"
 #   }
+
+
+
+set :rails_env, :production
+
+server '45.125.33.66', user: 'xiangyang', roles: %w{app}
+
+server '45.125.33.66',
+       user: 'xiangyang',
+       ssh_options: {
+           keys: %w(~/.ssh/id_rsa)
+       }
+
+
+
