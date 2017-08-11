@@ -36,7 +36,8 @@ set :scm, :git
 # set :pty, true
 
 # Default value for :linked_files is []
-set :linked_files, "config/database.yml", "config/secrets.yml"
+# set :linked_files, "config/database.yml", "config/secrets.yml"
+set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
 
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
@@ -60,12 +61,11 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-        execute "cd #{current_path}; RAILS_ENV=#{fetch(:stage)} #{fetch(:rvm_binary)} #{fetch(:rvm_ruby_version)} do bundle install"
-        execute "cd #{current_path}; RAILS_ENV=#{fetch(:stage)} #{fetch(:rvm_binary)} #{fetch(:rvm_ruby_version)} do bundle exec rake db:migrate"
-        execute "cd #{current_path}; RAILS_ENV=#{fetch(:stage)} #{fetch(:rvm_binary)} #{fetch(:rvm_ruby_version)} do bundle exec rake assets:precompile"
+      execute "cd #{current_path}; RAILS_ENV=#{fetch(:stage)} #{fetch(:rvm_binary)} #{fetch(:rvm_ruby_version)} do bundle install"
+      execute "cd #{current_path}; RAILS_ENV=#{fetch(:stage)} #{fetch(:rvm_binary)} #{fetch(:rvm_ruby_version)} do bundle exec rake db:migrate"
+      execute "cd #{current_path}; RAILS_ENV=#{fetch(:stage)} #{fetch(:rvm_binary)} #{fetch(:rvm_ruby_version)} do bundle exec rake assets:precompile"
 
-        execute "touch #{fetch(:current)}/tmp/restart.txt"
-      end
+      execute "touch #{fetch(:current)}/tmp/restart.txt"
     end
   end
 
