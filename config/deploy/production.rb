@@ -17,7 +17,7 @@
 # property set. Specify the username and a domain or IP for the server.
 # Don't use `:all`, it's a meta role.
 
-# role :app, %w{deploy@example.com}, my_property: :my_value
+role :app, "45.125.33.66"
 # role :web, %w{user1@primary.com user2@additional.com}, other_property: :other_value
 # role :db,  %w{deploy@example.com}
 
@@ -64,13 +64,13 @@
 
 set :rails_env, :production
 
-server '45.125.33.66', user: 'xiangyang', roles: %w{app}
-
 server '45.125.33.66',
-       user: 'xiangyang',
-       ssh_options: {
-           keys: %w(~/.ssh/id_rsa)
-       }
+user: 'xiangyang',
+roles: %w{app},
+ssh_options: {
+  keys: %w(~/.ssh/id_rsa),
+  password: 'zaq12wsx'
+}
 
 
 
