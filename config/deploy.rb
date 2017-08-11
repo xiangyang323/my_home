@@ -38,6 +38,7 @@ set :scm, :git
 # Default value for :linked_files is []
 # set :linked_files, "config/database.yml", "config/secrets.yml"
 set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
+set :linked_files, fetch(:linked_files, []).push('config/database.yml', "config/secrets.yml")
 
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
