@@ -17,9 +17,9 @@ class Home::PostController < HomeController
       @head_title = "编辑活动"
       @post = Post.find_by(id: params[:id])
     end
-    @brands = Brand.all
+    @brands = UserBrand.includes(:brand).where(user_id: current_user.id).map(&:brand)
     if request.post?
-      @post.attributes = params.require(:post).permit(:title, :building, :province, :city, :district, :detail_address, :room_cnt, :living_room_cnt, :toilet_cnt, :kitchen_cnt, :home_size, :content1, :content2, :content3)
+      @post.attributes = params.require(:post).permit(:title, :building, :province, :city, :district, :detail_address, :room_cnt, :living_room_cnt, :toilet_cnt, :kitchen_cnt, :home_size, :content1, :content2, :content3, :brand_ids)
       @post.check_flag = Post::EDIT_FLAG
       if !@post.valid?
         flash[:notice] = @post.errors.full_messages

@@ -31,3 +31,25 @@ function addFavorite(post_id){
     window.location.href = "/login"
   }
 }
+
+function selectBrand(obj){
+  var brandobj = "#brand_" + $(obj).attr("brand_id");
+  if($(brandobj).is(':hidden')){
+    $(brandobj).show();
+  }else{
+    $(brandobj).hide();
+  }
+}
+
+function postSubmit(){
+  var arr = [];
+  $(".product_edit li").each(function(){
+    var brandobj = "#brand_" + $(this).attr("brand_id");
+    if(!$(brandobj).is(':hidden')){
+      arr.push($(this).attr("brand_id"));
+    }
+  });
+
+  $("#brand_ids").val(arr);
+  $('form').submit();
+}

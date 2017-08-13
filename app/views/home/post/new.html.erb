@@ -34,14 +34,18 @@
         </div>
         <div class="box_text mb20">
           <p>服务品牌<!--span>＊</span--></p>
+          <%= hidden_field :post, :brand_ids, id: "brand_ids"%>
           <ul class="product_edit clearfix">
-            <%5.times.each do |i|%>
-              <li>
+            <%@brands.each do |brand|%>
+              <li brand_id="<%=brand.id%>" onclick="selectBrand(this)">
                 <div class="main_wrap">
                   <div class="pic_wrap">
-                    <%=image_tag "u.jpg"%>
+                    <%=image_tag Upload.get_avatar(brand.logo, "thumb")%>
+                    <span class="con-img" style="<%=(!@post.brand_ids.nil? && @post.brand_ids.split(",").include?(brand.id.to_s))? '': 'display: none'%>" id="brand_<%=brand.id%>">
+                      <span class="icon-clipboard"></span>
+                    </span>
                   </div>
-                  <div class="name_short">哈哈哈哈哈红红火火恍恍惚惚哈哈哈哈哈哈哈哈哈</div>
+                  <div class="name_short"><%=brand.name%></div>
                 </div>
               </li>
             <%end%>
@@ -70,7 +74,7 @@
           </div>
         </div>
 
-        <div class="confirm_area confirm_area_post" onclick="$('form').submit()">
+        <div class="confirm_area confirm_area_post" onclick="postSubmit()">
           <span class="confirm_a">保存</span>
         </div>
   <%end%>

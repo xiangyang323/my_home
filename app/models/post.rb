@@ -113,4 +113,9 @@ class Post < ApplicationRecord
   def total_favorite
     self.user_favorite.count
   end
+
+  def get_brands
+    return [] if self.brand_ids.nil?
+    Brand.where(id: self.brand_ids.split(","))
+  end
 end

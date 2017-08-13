@@ -10,7 +10,7 @@ class Home::BrandController < HomeController
       if @brand.valid?
         @brand.save
         UserBrand.create(user_id: current_user.id, brand_id: @brand.id)
-        redirect_to :list, type: Brand::HAVE_BIND
+        redirect_to controller: "/home/brand", action: "list", type: Brand::HAVE_BIND
       else
         p @brand.errors
       end

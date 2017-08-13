@@ -43,7 +43,6 @@ $().ready(function() {
       //alert('验证不通过');
       return false;
     }
-
   });
 });
 

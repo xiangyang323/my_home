@@ -35,9 +35,11 @@
       <div class="brand_pic">
         <ul class="clearfix">
           <span class="icon-chevron-thin-left"></span>
-          <li><img src="../images/u.jpg"></li>
-          <li><img src="../images/u.jpg"></li>
-          <li><img src="../images/u.jpg"></li>
+          <%@post.get_brands.each do |brand|%>
+              <li>
+                <%=image_tag Upload.get_avatar(brand.logo, "thumb")%>
+              </li>
+          <%end%>
           <span class="icon-chevron-thin-right"></span>
         </ul>
       </div>
